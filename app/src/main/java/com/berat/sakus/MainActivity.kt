@@ -233,6 +233,16 @@ fun MyApp() {
         }
         composable("arac_sorgu") {
             AracSorguScreen(
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToDetail = { busNumber ->
+                    navController.navigate("arac_detay/$busNumber")
+                }
+            )
+        }
+        composable("arac_detay/{busNumber}") { backStackEntry ->
+            val busNumber = backStackEntry.arguments?.getString("busNumber")?.toIntOrNull() ?: 0
+            AracDetayScreen(
+                busNumber = busNumber,
                 onNavigateBack = { navController.popBackStack() }
             )
         }

@@ -42,6 +42,7 @@ import com.berat.sakus.ui.theme.PrimaryPurple
 @Composable
 fun AracSorguScreen(
     onNavigateBack: () -> Unit,
+    onNavigateToDetail: (Int) -> Unit = {},
     viewModel: AracSorguViewModel = viewModel()
 ) {
     val state by viewModel.state.collectAsState()
@@ -162,7 +163,10 @@ fun AracSorguScreen(
                         }
                     }
                     items(state.sonuclar, key = { "${it.plaka}_${it.aracNumarasi}" }) { arac ->
-                        AracSonucKarti(arac = arac)
+                        AracSonucKarti(
+                            arac = arac,
+                            onClick = { onNavigateToDetail(arac.aracNumarasi) }
+                        )
                     }
                 }
             }
@@ -401,7 +405,7 @@ private fun LiveTrackingBanner() {
 }
 
 @Composable
-private fun AracSonucKarti(arac: AracKonumu) {
+private fun AracSonucKarti(arac: AracKonumu, onClick: () -> Unit = {}) {
     val durumRenk = when (arac.durum.uppercase()) {
         "AT_STOP", "DWELL" -> Color(0xFF4CAF50)
         "IN_TRAFFIC" -> Color(0xFFFFA726)
@@ -415,7 +419,7 @@ private fun AracSonucKarti(arac: AracKonumu) {
     }
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface

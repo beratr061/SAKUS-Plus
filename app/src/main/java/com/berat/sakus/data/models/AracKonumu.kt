@@ -20,7 +20,12 @@ data class AracKonumu(
     val baslangicYer: String,
     val bitisYer: String,
     val aracNumarasi: Int,
-    val guzergahId: Int?
+    val guzergahId: Int?,
+    val hatId: Int = 0,
+    val takipId: Long = 0,
+    val sonrakiDurakId: Int = 0,
+    val mevcutDurakId: Int = 0,
+    val nhatNo: Int = 0
 ) {
     val hizFormati: String get() = "$hiz km/h"
 
@@ -92,7 +97,12 @@ data class AracKonumu(
                 aracNumarasi = if (json.has("busNumber") && !json.get("busNumber").isJsonNull) {
                     try { json.get("busNumber").asInt } catch (_: Exception) { json.get("busNumber").asString.filter { it.isDigit() }.toIntOrNull() ?: 0 }
                 } else 0,
-                guzergahId = routeId
+                guzergahId = routeId,
+                hatId = if (json.has("lineId") && !json.get("lineId").isJsonNull) json.get("lineId").asInt else 0,
+                takipId = if (json.has("trackingId") && !json.get("trackingId").isJsonNull) json.get("trackingId").asLong else 0L,
+                sonrakiDurakId = if (json.has("nextStopId") && !json.get("nextStopId").isJsonNull) json.get("nextStopId").asInt else 0,
+                mevcutDurakId = if (json.has("atStopId") && !json.get("atStopId").isJsonNull) json.get("atStopId").asInt else 0,
+                nhatNo = if (json.has("nhatNo") && !json.get("nhatNo").isJsonNull) json.get("nhatNo").asInt else 0
             )
         }
     }

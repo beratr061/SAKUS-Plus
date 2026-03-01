@@ -69,7 +69,7 @@ class AracSorguViewModel(application: Application) : AndroidViewModel(applicatio
                 }
                 .collect { araclar ->
                     _state.value = _state.value.copy(
-                        sonuclar = araclar,
+                        sonuclar = araclar.sortedWith(compareBy({ it.plaka }, { it.aracNumarasi })),
                         yukleniyor = false
                     )
                 }
