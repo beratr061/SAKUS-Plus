@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚍 SAKUS Plus
+# 🚍 SAKUS+
 
 ### Sakarya Akıllı Ulaşım Sistemi
 
