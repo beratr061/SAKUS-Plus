@@ -1,0 +1,104 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/androidTest/java/com/berat/sakus/ExampleInstrumentedTest.kt</file>
+  <line>11</line>
+  <module>SAKUS+.app.androidTest</module>
+  <package>com.berat.sakus</package>
+  <entry_point TYPE="class" FQNAME="com.berat.sakus.ExampleInstrumentedTest" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>3</length>
+  <highlighted_element>/**</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/androidTest/java/com/berat/sakus/ExampleInstrumentedTest.kt</file>
+  <line>18</line>
+  <module>SAKUS+.app.androidTest</module>
+  <package>com.berat.sakus</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.ExampleInstrumentedTest void useAppContext()" />
+  <language>kotlin</language>
+  <offset>4</offset>
+  <length>5</length>
+  <highlighted_element>@Test</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/MainActivity.kt</file>
+  <line>39</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus</package>
+  <entry_point TYPE="class" FQNAME="com.berat.sakus.MainActivity" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>42</length>
+  <highlighted_element>class MainActivity : ComponentActivity() {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/SAKUSApplication.kt</file>
+  <line>12</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus</package>
+  <entry_point TYPE="class" FQNAME="com.berat.sakus.SAKUSApplication" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>70</length>
+  <highlighted_element>class SAKUSApplication : Application(), SingletonImageLoader.Factory {</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/test/java/com/berat/sakus/ExampleUnitTest.kt</file>
+  <line>7</line>
+  <module>SAKUS+.app.unitTest</module>
+  <package>com.berat.sakus</package>
+  <entry_point TYPE="class" FQNAME="com.berat.sakus.ExampleUnitTest" />
+  <language>kotlin</language>
+  <offset>0</offset>
+  <length>3</length>
+  <highlighted_element>/**</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/test/java/com/berat/sakus/ExampleUnitTest.kt</file>
+  <line>13</line>
+  <module>SAKUS+.app.unitTest</module>
+  <package>com.berat.sakus</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.ExampleUnitTest void addition_isCorrect()" />
+  <language>kotlin</language>
+  <offset>4</offset>
+  <length>5</length>
+  <highlighted_element>@Test</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+</problems>

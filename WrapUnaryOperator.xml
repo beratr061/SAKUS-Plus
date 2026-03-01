@@ -1,0 +1,41 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/ui/screens/SakusHomeScreen.kt</file>
+  <line>240</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus.ui.screens</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.ui.screens.SakusHomeScreenKt void Kart54Section()" />
+  <problem_class id="WrapUnaryOperator" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Ambiguous unary operator use with number constant</problem_class>
+  <description>Wrap unary operator and value with ()</description>
+  <highlighted_element>-19.dp</highlighted_element>
+  <language>kotlin</language>
+  <offset>28</offset>
+  <length>6</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/ui/screens/SakusHomeScreen.kt</file>
+  <line>251</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus.ui.screens</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.ui.screens.SakusHomeScreenKt void Kart54Section()" />
+  <problem_class id="WrapUnaryOperator" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Ambiguous unary operator use with number constant</problem_class>
+  <description>Wrap unary operator and value with ()</description>
+  <highlighted_element>-35.dp</highlighted_element>
+  <language>kotlin</language>
+  <offset>28</offset>
+  <length>6</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/ui/screens/SakusHomeScreen.kt</file>
+  <line>259</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus.ui.screens</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.ui.screens.SakusHomeScreenKt void Kart54Section()" />
+  <problem_class id="WrapUnaryOperator" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Ambiguous unary operator use with number constant</problem_class>
+  <description>Wrap unary operator and value with ()</description>
+  <highlighted_element>-7.dp</highlighted_element>
+  <language>kotlin</language>
+  <offset>28</offset>
+  <length>5</length>
+</problem>
+</problems>

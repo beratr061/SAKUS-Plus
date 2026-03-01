@@ -1,0 +1,34 @@
+[
+  {
+    "id": "all",
+    "label": "Tümü"
+  },
+  {
+    "id": "belediye",
+    "label": "Belediye"
+  },
+  {
+    "id": "ozel_halk",
+    "label": "ÖHO"
+  },
+  {
+    "id": "minibus",
+    "label": "Minibüs"
+  },
+  {
+    "id": "dolmus",
+    "label": "Taksi Dolmuş"
+  },
+  {
+    "id": "tram",
+    "label": "Tramvay"
+  },
+  {
+    "id": "metrobus",
+    "label": "Metrobüs"
+  },
+  {
+    "id": "adaray",
+    "label": "Adaray"
+  }
+]

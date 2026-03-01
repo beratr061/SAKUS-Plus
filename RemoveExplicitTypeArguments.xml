@@ -1,0 +1,41 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/ui/screens/DuraklarViewModel.kt</file>
+  <line>66</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus.ui.screens</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.ui.screens.DuraklarViewModel void fetchUserLocation(boolean hasPermission)" />
+  <problem_class id="RemoveExplicitTypeArguments" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Unnecessary type argument</problem_class>
+  <description>Explicit type arguments can be inferred</description>
+  <highlighted_element>&lt;android.location.Location?&gt;</highlighted_element>
+  <language>kotlin</language>
+  <offset>72</offset>
+  <length>28</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/ui/screens/LineMapScreen.kt</file>
+  <line>228</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus.ui.screens</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.ui.screens.LineMapScreenKt void LineMapScreen(com.berat.sakus.data.HatBilgisi hat, kotlin.jvm.functions.Function0&lt;kotlin.Unit&gt; onNavigateBack, kotlin.jvm.functions.Function1&lt;? super com.berat.sakus.data.Duyuru,kotlin.Unit&gt; onNavigateDuyuruDetail)" />
+  <problem_class id="RemoveExplicitTypeArguments" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Unnecessary type argument</problem_class>
+  <description>Explicit type arguments can be inferred</description>
+  <highlighted_element>&lt;LatLng&gt;</highlighted_element>
+  <language>kotlin</language>
+  <offset>59</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/ui/screens/LineMapScreen.kt</file>
+  <line>238</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus.ui.screens</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.ui.screens.LineMapScreenKt void LineMapScreen(com.berat.sakus.data.HatBilgisi hat, kotlin.jvm.functions.Function0&lt;kotlin.Unit&gt; onNavigateBack, kotlin.jvm.functions.Function1&lt;? super com.berat.sakus.data.Duyuru,kotlin.Unit&gt; onNavigateDuyuruDetail)" />
+  <problem_class id="RemoveExplicitTypeArguments" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Unnecessary type argument</problem_class>
+  <description>Explicit type arguments can be inferred</description>
+  <highlighted_element>&lt;LatLng&gt;</highlighted_element>
+  <language>kotlin</language>
+  <offset>59</offset>
+  <length>8</length>
+</problem>
+</problems>

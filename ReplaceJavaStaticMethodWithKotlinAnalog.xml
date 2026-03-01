@@ -1,0 +1,28 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/ui/screens/LineMapScreen.kt</file>
+  <line>202</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus.ui.screens</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.ui.screens.LineMapScreenKt void LineMapScreen(com.berat.sakus.data.HatBilgisi hat, kotlin.jvm.functions.Function0&lt;kotlin.Unit&gt; onNavigateBack, kotlin.jvm.functions.Function1&lt;? super com.berat.sakus.data.Duyuru,kotlin.Unit&gt; onNavigateDuyuruDetail)" />
+  <problem_class id="ReplaceJavaStaticMethodWithKotlinAnalog" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Java methods should be replaced with Kotlin analog</problem_class>
+  <description>Should be replaced with Kotlin function</description>
+  <highlighted_element>abs(v.lat - stop.lat)</highlighted_element>
+  <language>kotlin</language>
+  <offset>33</offset>
+  <length>21</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/ui/screens/LineMapScreen.kt</file>
+  <line>202</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus.ui.screens</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.ui.screens.LineMapScreenKt void LineMapScreen(com.berat.sakus.data.HatBilgisi hat, kotlin.jvm.functions.Function0&lt;kotlin.Unit&gt; onNavigateBack, kotlin.jvm.functions.Function1&lt;? super com.berat.sakus.data.Duyuru,kotlin.Unit&gt; onNavigateDuyuruDetail)" />
+  <problem_class id="ReplaceJavaStaticMethodWithKotlinAnalog" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Java methods should be replaced with Kotlin analog</problem_class>
+  <description>Should be replaced with Kotlin function</description>
+  <highlighted_element>abs(v.lng - stop.lng)</highlighted_element>
+  <language>kotlin</language>
+  <offset>76</offset>
+  <length>21</length>
+</problem>
+</problems>

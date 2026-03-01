@@ -1,0 +1,15 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/assets/icons/bus-location.svg</file>
+  <line>17</line>
+  <module>SAKUS+.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/assets/icons/bus-location.svg" />
+  <problem_class id="XmlHighlighting" severity="ERROR" attribute_key="WRONG_REFERENCES_ATTRIBUTES">XML highlighting</problem_class>
+  <hints />
+  <description>Attribute data-name is not allowed here #loc</description>
+  <highlighted_element>data-name</highlighted_element>
+  <language>SVG</language>
+  <offset>19</offset>
+  <length>9</length>
+</problem>
+</problems>

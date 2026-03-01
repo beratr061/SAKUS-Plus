@@ -1,0 +1,472 @@
+{
+  "1": {
+    "line_no": "1",
+    "name": "1 SAKARYAPARK - KÜPÇÜLER - K. TERMİNAL",
+    "sbb_id": 2
+  },
+  "2": {
+    "line_no": "2",
+    "name": "2 ORTA GARAJ - HIZIR İLYAS",
+    "sbb_id": 3
+  },
+  "3": {
+    "line_no": "3",
+    "name": "3 D. MEYDANI - YEŞİLTEPE - Y. TERMİNAL",
+    "sbb_id": 4
+  },
+  "4": {
+    "line_no": "4",
+    "name": "4 KAMPÜS - SAKARYAPARK",
+    "sbb_id": 5
+  },
+  "6": {
+    "line_no": "6",
+    "name": "6 O.GARAJ - OTUZİKİEVLER - BEŞKÖPRÜ - KAMPÜS",
+    "sbb_id": 7
+  },
+  "7": {
+    "line_no": "7",
+    "name": "7 D. MEYDANI - YILDIZTEPE - Y. TERMİNAL",
+    "sbb_id": 8
+  },
+  "8": {
+    "line_no": "9A",
+    "name": "9A ORTA GARAJ - ALTYOL - MALTEPE",
+    "sbb_id": 9
+  },
+  "9": {
+    "line_no": "9B",
+    "name": "9B ORTA GARAJ - MALTEPE",
+    "sbb_id": 10
+  },
+  "10": {
+    "line_no": "12",
+    "name": "12 YAZLIK - KAMPÜS - ESENTEPE",
+    "sbb_id": 12
+  },
+  "11": {
+    "line_no": "14",
+    "name": "14 1. GEÇİT - LOJMANLAR - YAZLIK",
+    "sbb_id": 14
+  },
+  "12": {
+    "line_no": "15",
+    "name": "15 ATATÜRK STADYUMU - KAMPÜS",
+    "sbb_id": 15
+  },
+  "13": {
+    "line_no": "17",
+    "name": "17 GÜNEŞLER - ADATIP - ŞİMŞEK EVLER",
+    "sbb_id": 16
+  },
+  "14": {
+    "line_no": "18",
+    "name": "18 ZİRAİ ALETLER - ADATIP - YILDIZ",
+    "sbb_id": 17
+  },
+  "16": {
+    "line_no": "19K",
+    "name": "19K SAKARYAPARK - KAMPÜS",
+    "sbb_id": 19
+  },
+  "17": {
+    "line_no": "20",
+    "name": "20 O.GARAJ - ALTINOVA - OTUZİKİEVLER - KAMPÜS",
+    "sbb_id": 20
+  },
+  "18": {
+    "line_no": "20A",
+    "name": "20A O. GARAJ - SERDİVAN - BEŞKÖPRÜ",
+    "sbb_id": 21
+  },
+  "19": {
+    "line_no": "21C",
+    "name": "21C DEMOKRASİ MEYDANI- S. ZAİM BLV - KARAMAN",
+    "sbb_id": 22
+  },
+  "20": {
+    "line_no": "21D",
+    "name": "21D UNKAPANI - İKİZCE - KARAMAN",
+    "sbb_id": 23
+  },
+  "21": {
+    "line_no": "21K",
+    "name": "21K KARAMAN - KAMPÜS",
+    "sbb_id": 24
+  },
+  "22": {
+    "line_no": "22C",
+    "name": "22C O. GARAJ - UNKAPANI - CAMİLİ 1",
+    "sbb_id": 25
+  },
+  "23": {
+    "line_no": "22D",
+    "name": "22D O. GARAJ - KİRTETEPE - CAMİLİ 1",
+    "sbb_id": 26
+  },
+  "24": {
+    "line_no": "22K",
+    "name": "22K KAMPÜS - CAMİLİ 1/2",
+    "sbb_id": 27
+  },
+  "25": {
+    "line_no": "23",
+    "name": "23 O. GARAJ - CAMİLİ 2",
+    "sbb_id": 28
+  },
+  "26": {
+    "line_no": "24",
+    "name": "24 O. GARAJ - TOKİ - KORUCUK",
+    "sbb_id": 29
+  },
+  "27": {
+    "line_no": "24K",
+    "name": "24K KAMPÜS-KORUCUK ",
+    "sbb_id": 30
+  },
+  "28": {
+    "line_no": "25",
+    "name": "25 O. GARAJ - BAYTUR İDEALKENT",
+    "sbb_id": 32
+  },
+  "29": {
+    "line_no": "26",
+    "name": "26 D. MEYDANI - SERDİVAN HAST. - KAMPÜS",
+    "sbb_id": 33
+  },
+  "30": {
+    "line_no": "27",
+    "name": "27 O. GARAJ - ATSO - KAMPÜS",
+    "sbb_id": 34
+  },
+  "32": {
+    "line_no": "29",
+    "name": "29 YENİ TERMİNAL - KAMPÜS",
+    "sbb_id": 36
+  },
+  "36": {
+    "line_no": "19S",
+    "name": "19S ORTA GARAJ - ÇARK - SİVRİTEPE",
+    "sbb_id": 18
+  },
+  "37": {
+    "line_no": "16K",
+    "name": "16K K. TERMİNAL - SERDİVAN - KAMPÜS",
+    "sbb_id": 97
+  },
+  "38": {
+    "line_no": "19E",
+    "name": "19E D. MEYDANI - HACIOĞLU - SAKARYAPARK",
+    "sbb_id": 98
+  },
+  "40": {
+    "line_no": "100",
+    "name": "100 ABALI - ÇEŞME MEYDANI",
+    "sbb_id": 68
+  },
+  "41": {
+    "line_no": "151-KY",
+    "name": "151-KY ADLİYE / KÖY HİZMETLERİ-DONATIM GARAJ",
+    "sbb_id": 309
+  },
+  "42": {
+    "line_no": "151-AY",
+    "name": "151-AY ADLİYE / AKÇAY - DONATIM GARAJ",
+    "sbb_id": 69
+  },
+  "43": {
+    "line_no": "151-KÇ",
+    "name": "151-KÇ ADLİYE / KARAÇAM - DONATIM GARAJ",
+    "sbb_id": 70
+  },
+  "45": {
+    "line_no": "130",
+    "name": "130 AKYAZI - DONATIM GARAJ",
+    "sbb_id": 43
+  },
+  "47": {
+    "line_no": "101",
+    "name": "101 ANDAL / İLYASLAR - ÇEŞME MEYDANI",
+    "sbb_id": 72
+  },
+  "48": {
+    "line_no": "210",
+    "name": "210 GEYVE - DONATIM GARAJ",
+    "sbb_id": 53
+  },
+  "49": {
+    "line_no": "330",
+    "name": "330 ARALIK - DONATIM GARAJ",
+    "sbb_id": 103
+  },
+  "50": {
+    "line_no": "150-AÇ",
+    "name": "150-AÇ ARİFİYE AÇMALAR - DONATIM GARAJ",
+    "sbb_id": 39
+  },
+  "51": {
+    "line_no": "150-KLY",
+    "name": "150-KLY ARİFİYE KALAYCI - DONATIM GARAJ",
+    "sbb_id": 40
+  },
+  "53": {
+    "line_no": "150-K",
+    "name": "150-K ARİFİYE KYK - SAÜ KAMPÜS",
+    "sbb_id": 41
+  },
+  "55": {
+    "line_no": "32",
+    "name": "32 ORTA GARAJ -AŞIRLAR",
+    "sbb_id": 38
+  },
+  "56": {
+    "line_no": "172",
+    "name": "172 ÇAYBAŞI YENİKÖY - YENİ CAMİ",
+    "sbb_id": 73
+  },
+  "58": {
+    "line_no": "173",
+    "name": "173 ÇAYKIŞLA - YENİ CAMİ",
+    "sbb_id": 75
+  },
+  "59": {
+    "line_no": "174",
+    "name": "174 DEĞİRMENDERE - YENİ CAMİ",
+    "sbb_id": 104
+  },
+  "60": {
+    "line_no": "331",
+    "name": "331 AŞAĞIDEREKÖY - DONATIM GARAJ",
+    "sbb_id": 105
+  },
+  "61": {
+    "line_no": "332",
+    "name": "332 ESENTEPE / KIRCAALİ - DONATIM GARAJ",
+    "sbb_id": 106
+  },
+  "62": {
+    "line_no": "334",
+    "name": "334 YUKARIDEREKÖY - DONATIM GARAJ",
+    "sbb_id": 107
+  },
+  "65": {
+    "line_no": "350",
+    "name": "350 SÖĞÜTLÜ - DONATIM GARAJ",
+    "sbb_id": 76
+  },
+  "71": {
+    "line_no": "190-OT",
+    "name": "190-OT FERİZLİ / OTOBAN - DONATIM GARAJ",
+    "sbb_id": 313
+  },
+  "74": {
+    "line_no": "220",
+    "name": "220 HENDEK - DONATIM GARAJ",
+    "sbb_id": 42
+  },
+  "76": {
+    "line_no": "104-KA",
+    "name": "104-KA İKİZCE - KAYNARCA YOLU - İHSANİYE GARAJ",
+    "sbb_id": 112
+  },
+  "77": {
+    "line_no": "176",
+    "name": "176 KAMIŞLI - YENİ CAMİ",
+    "sbb_id": 79
+  },
+  "78": {
+    "line_no": "105",
+    "name": "105 KARADERE - İHSANİYE GARAJ",
+    "sbb_id": 113
+  },
+  "79": {
+    "line_no": "240",
+    "name": "240 KARAPÜRÇEK - YENİ CAMİ",
+    "sbb_id": 58
+  },
+  "80": {
+    "line_no": "106",
+    "name": "106 KAVAKLIORMAN - ÇEŞME MEYDANI",
+    "sbb_id": 80
+  },
+  "83": {
+    "line_no": "333-AD",
+    "name": "333-AD KAZIMPAŞA / ALANDÜZÜ - DONATIM GARAJ",
+    "sbb_id": 63
+  },
+  "86": {
+    "line_no": "333-KZ",
+    "name": "333-KZ KAZIMPAŞA / KIZILCIKLI - DONATIM GARAJ",
+    "sbb_id": 61
+  },
+  "88": {
+    "line_no": "333-MŞ",
+    "name": "333-MŞ KAZIMPAŞA / MEŞELİ - DONATIM GARAJ",
+    "sbb_id": 66
+  },
+  "89": {
+    "line_no": "333-EK",
+    "name": "333-EK KAZIMPAŞA / EVRENKÖY - DONATIM GARAJ",
+    "sbb_id": 67
+  },
+  "90": {
+    "line_no": "171",
+    "name": "171 BEKİRPAŞA / KADIKÖY - YENİ CAMİ",
+    "sbb_id": 82
+  },
+  "91": {
+    "line_no": "152",
+    "name": "152 KEMALİYE - YENİ CAMİ",
+    "sbb_id": 83
+  },
+  "92": {
+    "line_no": "153",
+    "name": "153 KIŞLAÇAY - DONATIM GARAJ",
+    "sbb_id": 84
+  },
+  "96": {
+    "line_no": "351",
+    "name": "351 KURUDİL - ÇEŞME MEYDANI",
+    "sbb_id": 114
+  },
+  "97": {
+    "line_no": "132",
+    "name": "132 KÜÇÜCEK - YENİ CAMİ",
+    "sbb_id": 85
+  },
+  "98": {
+    "line_no": "154",
+    "name": "154 NEHİRKENT - YENİ CAMİ",
+    "sbb_id": 86
+  },
+  "99": {
+    "line_no": "133",
+    "name": "133 ORMANKÖY - ÇEŞME MEYDANI",
+    "sbb_id": 115
+  },
+  "100": {
+    "line_no": "320-İPK",
+    "name": "320-İPK SAPANCA / İPEKYOLU - DONATIM GARAJ",
+    "sbb_id": 87
+  },
+  "101": {
+    "line_no": "320-YNK",
+    "name": "320-YNK SAPANCA / YANIK - DONATIM GARAJ",
+    "sbb_id": 88
+  },
+  "102": {
+    "line_no": "320-YZV",
+    "name": "320-YZV SAPANCA / YÜZEVLER - DONATIM GARAJ",
+    "sbb_id": 55
+  },
+  "103": {
+    "line_no": "136",
+    "name": "136 TAŞLIK - SBB PERON",
+    "sbb_id": 56
+  },
+  "104": {
+    "line_no": "109",
+    "name": "109 VAN / BAĞLAR - UNKAPANI",
+    "sbb_id": 89
+  },
+  "105": {
+    "line_no": "222",
+    "name": "222 YEŞİLYURT - İHSANİYE GARAJ",
+    "sbb_id": 90
+  },
+  "106": {
+    "line_no": "35-KM",
+    "name": "35-KM ŞAL SOKAK - KAMPÜS",
+    "sbb_id": 57
+  },
+  "107": {
+    "line_no": "211",
+    "name": "211 ALİFUATPAŞA - DONATIM GARAJ",
+    "sbb_id": 91
+  },
+  "108": {
+    "line_no": "250",
+    "name": "250 KOCAALİ - KARASU - YENİ TERMİNAL",
+    "sbb_id": 59
+  },
+  "109": {
+    "line_no": "270",
+    "name": "270 KAYNARCA - İHSANİYE GARAJ",
+    "sbb_id": 60
+  },
+  "110": {
+    "line_no": "310",
+    "name": "310 PAMUKOVA - DONATIM GARAJ",
+    "sbb_id": 52
+  },
+  "111": {
+    "line_no": "131",
+    "name": "131 KUZULUK - DONATIM GARAJ",
+    "sbb_id": 92
+  },
+  "112": {
+    "line_no": "131-AK",
+    "name": "131-AK KUZULUK - AKYAZI",
+    "sbb_id": 231
+  },
+  "115": {
+    "line_no": "115",
+    "name": "115 TARAKLI - DONATIM GARAJ",
+    "sbb_id": 54
+  },
+  "126": {
+    "line_no": "30",
+    "name": "30 İHSANİYE - SÖĞÜTLÜ - FERİZLİ",
+    "sbb_id": 37
+  },
+  "129": {
+    "line_no": "24İ",
+    "name": "24İ YENİKENT İÇ HAT",
+    "sbb_id": 31
+  },
+  "131": {
+    "line_no": "11",
+    "name": "11 SERDİVAN - HIZIRTEPE - SAKARYAPARK",
+    "sbb_id": 11
+  },
+  "132": {
+    "line_no": "12AR",
+    "name": "12AR ESENTEPE - SEAH - O. GARAJ",
+    "sbb_id": 13
+  },
+  "133": {
+    "line_no": "8A",
+    "name": "8A ORTA GARAJ - OZANLAR - YAZLIK",
+    "sbb_id": 47
+  },
+  "134": {
+    "line_no": "8B",
+    "name": "8B ORTA GARAJ - ŞEKER - YAZLIK",
+    "sbb_id": 48
+  },
+  "135": {
+    "line_no": "28A",
+    "name": "28A Y. TERMİNAL - DONATIM - K. TERMİNAL",
+    "sbb_id": 99
+  },
+  "136": {
+    "line_no": "28B",
+    "name": "28B Y. TERMİNAL - SERDİVAN - K. TERMİNAL",
+    "sbb_id": 100
+  },
+  "141": {
+    "line_no": "320-K",
+    "name": "320-K SAPANCA / KYK - SAÜ KAMPÜS",
+    "sbb_id": 232
+  },
+  "200": {
+    "line_no": "A1",
+    "name": "A1 ADARAY",
+    "sbb_id": 51
+  },
+  "250": {
+    "line_no": "M1",
+    "name": "M1 GAR MEYDANI - KORUCUK",
+    "sbb_id": 50
+  }
+}

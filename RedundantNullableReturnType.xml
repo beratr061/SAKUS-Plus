@@ -1,0 +1,28 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/data/DurakClusterItem.kt</file>
+  <line>13</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus.data</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.data.DurakClusterItem java.lang.String getTitle()" />
+  <problem_class id="RedundantNullableReturnType" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Redundant nullable return type</problem_class>
+  <description>'getTitle' always returns non-null type</description>
+  <highlighted_element>?</highlighted_element>
+  <language>kotlin</language>
+  <offset>35</offset>
+  <length>1</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/java/com/berat/sakus/data/DurakClusterItem.kt</file>
+  <line>14</line>
+  <module>SAKUS+.app.main</module>
+  <package>com.berat.sakus.data</package>
+  <entry_point TYPE="method" FQNAME="com.berat.sakus.data.DurakClusterItem java.lang.String getSnippet()" />
+  <problem_class id="RedundantNullableReturnType" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Redundant nullable return type</problem_class>
+  <description>'getSnippet' always returns non-null type</description>
+  <highlighted_element>?</highlighted_element>
+  <language>kotlin</language>
+  <offset>37</offset>
+  <length>1</length>
+</problem>
+</problems>

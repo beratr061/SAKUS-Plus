@@ -1,0 +1,67 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/drawable/ic_app_logo.xml</file>
+  <line>31</line>
+  <module>SAKUS+.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_app_logo.xml" />
+  <problem_class id="AndroidLintVectorPath" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Long vector paths</problem_class>
+  <hints />
+  <description>&lt;html&gt;Very long vector path (9344 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector.&lt;/html&gt;</description>
+  <highlighted_element>M 783.68 567.69 C 779.69 567.1 775.63 566.59 771.52 566.15 L 774.45 519.22 C 773.16 517.84 771.8 516...</highlighted_element>
+  <language>XML</language>
+  <offset>26</offset>
+  <length>9344</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/drawable/ic_logo_dark.xml</file>
+  <line>45</line>
+  <module>SAKUS+.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_logo_dark.xml" />
+  <problem_class id="AndroidLintVectorPath" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Long vector paths</problem_class>
+  <hints />
+  <description>&lt;html&gt;Very long vector path (8226 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector.&lt;/html&gt;</description>
+  <highlighted_element>M 13.07 44.58 L 10.9 48.95 C 9.83 51.1 10.12 53.01 11.81 53.85 L 11.84 53.85 C 13.19 54.53 14.33 53....</highlighted_element>
+  <language>XML</language>
+  <offset>34</offset>
+  <length>8226</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/drawable/ic_logo_light.xml</file>
+  <line>45</line>
+  <module>SAKUS+.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_logo_light.xml" />
+  <problem_class id="AndroidLintVectorPath" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Long vector paths</problem_class>
+  <hints />
+  <description>&lt;html&gt;Very long vector path (8226 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector.&lt;/html&gt;</description>
+  <highlighted_element>M 13.07 44.58 L 10.9 48.95 C 9.83 51.1 10.12 53.01 11.81 53.85 L 11.84 53.85 C 13.19 54.53 14.33 53....</highlighted_element>
+  <language>XML</language>
+  <offset>34</offset>
+  <length>8226</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/drawable/ic_sbbyatay.xml</file>
+  <line>36</line>
+  <module>SAKUS+.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_sbbyatay.xml" />
+  <problem_class id="AndroidLintVectorPath" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Long vector paths</problem_class>
+  <hints />
+  <description>&lt;html&gt;Very long vector path (8339 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector.&lt;/html&gt;</description>
+  <highlighted_element>M 117.76 71.93 C 116.93 71.81 116.08 71.7 115.22 71.61 L 115.83 61.8 C 115.56 61.51 115.28 61.26 114...</highlighted_element>
+  <language>XML</language>
+  <offset>30</offset>
+  <length>8339</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/app/src/main/res/drawable/ic_sbbyatay.xml</file>
+  <line>42</line>
+  <module>SAKUS+.app.main</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_sbbyatay.xml" />
+  <problem_class id="AndroidLintVectorPath" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Long vector paths</problem_class>
+  <hints />
+  <description>&lt;html&gt;Very long vector path (8098 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector.&lt;/html&gt;</description>
+  <highlighted_element>M 161.53 36.55 L 165.11 32.26 C 167.59 34.31 170.19 35.6 173.33 35.6 C 175.81 35.6 177.3 34.62 177.3...</highlighted_element>
+  <language>XML</language>
+  <offset>34</offset>
+  <length>8098</length>
+</problem>
+</problems>

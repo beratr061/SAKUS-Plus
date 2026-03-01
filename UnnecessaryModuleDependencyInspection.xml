@@ -1,0 +1,26 @@
+<problems>
+<problem>
+  <file>SAKUS+.app.unitTest</file>
+  <module>SAKUS+.app.unitTest</module>
+  <entry_point TYPE="module" FQNAME="SAKUS+.app.unitTest" />
+  <problem_class id="UnnecessaryModuleDependencyInspection" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unnecessary module dependency</problem_class>
+  <hints>
+    <hint value="SAKUS+.app.main" />
+  </hints>
+  <description>Module 'SAKUS+.app.unitTest' sources do not depend on module 'SAKUS+.app.main' sources</description>
+  <highlighted_element />
+  <language />
+</problem>
+<problem>
+  <file>SAKUS+.app.androidTest</file>
+  <module>SAKUS+.app.androidTest</module>
+  <entry_point TYPE="module" FQNAME="SAKUS+.app.androidTest" />
+  <problem_class id="UnnecessaryModuleDependencyInspection" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Unnecessary module dependency</problem_class>
+  <hints>
+    <hint value="SAKUS+.app.main" />
+  </hints>
+  <description>Module 'SAKUS+.app.androidTest' sources do not depend on module 'SAKUS+.app.main' sources</description>
+  <highlighted_element />
+  <language />
+</problem>
+</problems>

@@ -1,0 +1,51 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/build.gradle.kts</file>
+  <line>1</line>
+  <module>SAKUS+</module>
+  <package>&lt;default&gt;</package>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/build.gradle.kts" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>This word is normally spelled as one.</description>
+  <highlighted_element>sub-projects</highlighted_element>
+  <language>kotlin</language>
+  <offset>78</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/compile_error.txt</file>
+  <line>52</line>
+  <module>SAKUS+</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/compile_error.txt" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>Use a instead of 'an' if the following word doesn't start with a vowel sound, e.g. 'a sentence', 'a university'.</description>
+  <highlighted_element>an</highlighted_element>
+  <language>TEXT</language>
+  <offset>132</offset>
+  <length>2</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/compile_error.txt</file>
+  <line>58</line>
+  <module>SAKUS+</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/compile_error.txt" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>Did you mean 'reference'?</description>
+  <highlighted_element>refe rence</highlighted_element>
+  <language>TEXT</language>
+  <offset>130</offset>
+  <length>10</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/compile_error.txt</file>
+  <line>78</line>
+  <module>SAKUS+</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/compile_error.txt" />
+  <problem_class id="GrazieInspection" severity="GRAMMAR_ERROR" attribute_key="GRAMMAR_ERROR">Grammar</problem_class>
+  <description>Did you mean 'type'?</description>
+  <highlighted_element>t ype</highlighted_element>
+  <language>TEXT</language>
+  <offset>133</offset>
+  <length>5</length>
+</problem>
+</problems>
