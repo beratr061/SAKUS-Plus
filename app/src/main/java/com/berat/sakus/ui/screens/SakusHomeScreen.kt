@@ -128,7 +128,7 @@ fun SakusHomeScreen(
                     
                     Kart54Section()
                     
-                    QuickActionsRow()
+                    QuickActionsRow(onNavigate = onNavigate)
                     
                     BottomGrid(onNavigate = onNavigate)
                 }
@@ -275,7 +275,7 @@ private fun Kart54Section() {
 }
 
 @Composable
-private fun QuickActionsRow() {
+private fun QuickActionsRow(onNavigate: (String) -> Unit = {}) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -286,13 +286,25 @@ private fun QuickActionsRow() {
         QuickActionItem("file:///android_asset/icons/card.svg", "Kartlarım")
         QuickActionItem("file:///android_asset/icons/store.svg", "Satış\nNoktaları")
         QuickActionItem("file:///android_asset/icons/wallet.svg", "Bakiye\nİşlemleri")
+        QuickActionItem(
+            iconPath = "",
+            label = "Yakınımdaki\nHatlar",
+            useIcon = Icons.Default.NearMe,
+            onClick = { onNavigate("yakinimdaki_hatlar") }
+        )
     }
 }
 
 @Composable
-private fun QuickActionItem(iconPath: String, label: String) {
+private fun QuickActionItem(
+    iconPath: String,
+    label: String,
+    useIcon: androidx.compose.ui.graphics.vector.ImageVector? = null,
+    onClick: (() -> Unit)? = null
+) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = if (onClick != null) Modifier.clickable { onClick() } else Modifier
     ) {
         Box(
             modifier = Modifier
@@ -302,11 +314,20 @@ private fun QuickActionItem(iconPath: String, label: String) {
                 .padding(10.dp),
             contentAlignment = Alignment.Center
         ) {
-            AsyncImage(
-                model = iconPath,
-                contentDescription = label,
-                colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(MaterialTheme.colorScheme.primary)
-            )
+            if (useIcon != null) {
+                Icon(
+                    imageVector = useIcon,
+                    contentDescription = label,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(24.dp)
+                )
+            } else {
+                AsyncImage(
+                    model = iconPath,
+                    contentDescription = label,
+                    colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(MaterialTheme.colorScheme.primary)
+                )
+            }
         }
         Spacer(modifier = Modifier.height(8.dp))
         Text(
@@ -337,7 +358,7 @@ private fun BottomGrid(onNavigate: (String) -> Unit) {
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             MenuCard(R.drawable.ic_bus_stop, "Duraklar", modifier = Modifier.weight(1f)) { onNavigate("duraklar") }
-            MenuCard(R.drawable.ic_location_arrow, "Nasıl Giderim ?", modifier = Modifier.weight(1f)) {}
+            MenuCard(R.drawable.ic_location_arrow, "Nasıl Giderim ?", modifier = Modifier.weight(1f)) { onNavigate("nasil_giderim") }
         }
     }
 }

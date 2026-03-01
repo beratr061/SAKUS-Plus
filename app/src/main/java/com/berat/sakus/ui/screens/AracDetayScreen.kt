@@ -354,7 +354,7 @@ private fun DurumKarti(arac: AracKonumu) {
                         "DEPARTING" -> Icons.Default.PlayArrow
                         "APPROACH", "ARRIVING" -> Icons.Default.NearMe
                         "OUT_OF_SERVICE" -> Icons.Default.Cancel
-                        else -> Icons.Default.HelpOutline
+                        else -> Icons.Default.Help
                     },
                     contentDescription = null,
                     tint = durumRenk,

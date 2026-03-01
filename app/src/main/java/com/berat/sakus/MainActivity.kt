@@ -284,6 +284,62 @@ fun MyApp() {
                 onNavigateBack = { navController.popBackStack() }
             )
         }
+        composable("yakinimdaki_hatlar") {
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry("yakinimdaki_hatlar")
+            }
+            val nearLinesViewModel: NearLinesViewModel = androidx.lifecycle.viewmodel.compose.viewModel(parentEntry)
+            NearLinesScreen(
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToLineMap = { nearLine ->
+                    // NearLine -> HatBilgisi dönüşümü
+                    val hat = com.berat.sakus.data.models.HatBilgisi(
+                        id = nearLine.lineId,
+                        ad = nearLine.lineName,
+                        hatNumarasi = nearLine.lineNumber,
+                        aracTipAdi = nearLine.typeValueName,
+                        aracTipAciklama = nearLine.typeValueName,
+                        aracTipRenk = nearLine.typeValueColor,
+                        aracTipId = nearLine.typeValueId,
+                        asisId = nearLine.ekentLineIntegrationId,
+                        slug = ""
+                    )
+                    val hatJson = gson.toJson(hat)
+                    val encodedJson = URLEncoder.encode(hatJson, "UTF-8")
+                    navController.navigate("map/$encodedJson")
+                },
+                viewModel = nearLinesViewModel
+            )
+        }
+        composable("nasil_giderim") {
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry("nasil_giderim")
+            }
+            val routeViewModel: RouteViewModel = androidx.lifecycle.viewmodel.compose.viewModel(parentEntry)
+            HowToGoScreen(
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToResults = {
+                    navController.navigate("guzergah_sonuclari")
+                },
+                viewModel = routeViewModel
+            )
+        }
+        composable("guzergah_sonuclari") {
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry("nasil_giderim")
+            }
+            val routeViewModel: RouteViewModel = androidx.lifecycle.viewmodel.compose.viewModel(parentEntry)
+            val uiState = routeViewModel.uiState.collectAsState().value
+            val itineraries = if (uiState is RouteUiState.Success) {
+                uiState.itineraries
+            } else {
+                emptyList()
+            }
+            RouteResultScreen(
+                itineraries = itineraries,
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
     }
     }
 }

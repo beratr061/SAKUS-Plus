@@ -63,6 +63,20 @@
 # Extracted model classes (new package)
 -keep class com.berat.sakus.data.models.** { *; }
 
+# Route ("Nasıl Giderim") API model sınıfları
+-keep class com.berat.sakus.data.models.RouteRequest { *; }
+-keep class com.berat.sakus.data.models.RouteResponse { *; }
+-keep class com.berat.sakus.data.models.RouteLocation { *; }
+-keep class com.berat.sakus.data.models.RouteData { *; }
+-keep class com.berat.sakus.data.models.RoutePlan { *; }
+-keep class com.berat.sakus.data.models.Itinerary { *; }
+-keep class com.berat.sakus.data.models.Leg { *; }
+-keep class com.berat.sakus.data.models.Stop { *; }
+-keep class com.berat.sakus.data.models.StationEstimate { *; }
+-keep class com.berat.sakus.data.models.NearLine { *; }
+-keep class com.berat.sakus.data.models.NearLineResponse { *; }
+-keep class com.berat.sakus.data.models.NearLineRoute { *; }
+
 # FilterOption ve TransportLine (Gson ile kullanılıyor)
 -keep class com.berat.sakus.ui.screens.FilterOption { *; }
 -keep class com.berat.sakus.ui.screens.TransportLine { *; }

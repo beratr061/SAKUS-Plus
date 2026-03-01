@@ -35,7 +35,6 @@ import com.berat.sakus.data.DurakBilgisi
 import com.berat.sakus.data.DurakClusterItem
 import com.berat.sakus.ui.theme.ThemeManager
 import com.berat.sakus.ui.theme.MapDarkBackground
-import com.berat.sakus.ui.theme.MapDarkCard
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -149,7 +148,7 @@ fun DuraklarScreen(
         scaffoldState = bottomSheetScaffoldState,
         sheetPeekHeight = 180.dp + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
         sheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-        sheetContainerColor = MapDarkBackground,
+        sheetContainerColor = MaterialTheme.colorScheme.surface,
         sheetDragHandle = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Spacer(modifier = Modifier.height(10.dp))
@@ -157,7 +156,7 @@ fun DuraklarScreen(
                     modifier = Modifier
                         .width(40.dp)
                         .height(4.dp)
-                        .background(Color.White.copy(alpha = 0.4f), RoundedCornerShape(2.dp))
+                        .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f), RoundedCornerShape(2.dp))
                 )
             }
         },
@@ -169,7 +168,7 @@ fun DuraklarScreen(
                     .fillMaxWidth()
                     .height(androidx.compose.ui.platform.LocalConfiguration.current.screenHeightDp.dp - WindowInsets.statusBars.asPaddingValues().calculateTopPadding() - 82.dp),
                 contentPadding = PaddingValues(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 24.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 items(
                     items = filteredDuraklar,
@@ -177,45 +176,52 @@ fun DuraklarScreen(
                 ) { durak ->
                     Surface(
                         onClick = { onNavigateToDetail(durak) },
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
-                        color = MapDarkCard
+                        color = MaterialTheme.colorScheme.surfaceVariant
                     ) {
                         Row(
-                            modifier = Modifier.padding(16.dp),
+                            modifier = Modifier.padding(14.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .size(40.dp)
+                                    .size(42.dp)
                                     .background(
-                                        MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                                        RoundedCornerShape(8.dp)
+                                        com.berat.sakus.ui.theme.PrimaryPurple.copy(alpha = 0.12f),
+                                        RoundedCornerShape(10.dp)
                                     ),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
                                     painter = painterResource(R.drawable.ic_bus_stop),
                                     contentDescription = "Durak",
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(24.dp)
+                                    tint = com.berat.sakus.ui.theme.PrimaryPurple,
+                                    modifier = Modifier.size(22.dp)
                                 )
                             }
-                            Spacer(modifier = Modifier.width(14.dp))
+                            Spacer(modifier = Modifier.width(12.dp))
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = durak.durakAdi.ifEmpty { "Durak ${durak.durakId}" },
-                                    color = Color.White,
+                                    color = MaterialTheme.colorScheme.onSurface,
                                     fontWeight = FontWeight.SemiBold,
-                                    fontSize = 15.sp
+                                    fontSize = 14.sp,
+                                    maxLines = 1,
+                                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
                                 )
                                 Text(
                                     text = "Durak No: ${durak.durakId}",
-                                    color = Color.White.copy(alpha = 0.6f),
+                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
                                     fontSize = 12.sp
                                 )
                             }
+                            Icon(
+                                painter = painterResource(R.drawable.baseline_arrow_forward_ios_24),
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
+                                modifier = Modifier.size(16.dp)
+                            )
                         }
                     }
                 }
@@ -387,7 +393,7 @@ fun DuraklarScreen(
                     end = 16.dp
                 )
                 .size(48.dp)
-                .background(MapDarkCard, RoundedCornerShape(12.dp))
+                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp))
                 .clickable {
                     if (userLocation != null) {
                         requestCenterOnUser = true
@@ -401,7 +407,7 @@ fun DuraklarScreen(
             Icon(
                 Icons.Default.MyLocation,
                 contentDescription = "Konumuma git",
-                tint = Color.White,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(24.dp)
             )
         }
@@ -412,7 +418,7 @@ fun DuraklarScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator(color = Color.White)
+                CircularProgressIndicator(color = com.berat.sakus.ui.theme.PrimaryPurple)
             }
         }
 
@@ -425,7 +431,7 @@ fun DuraklarScreen(
                         .padding(horizontal = 16.dp)
                         .clickable { selectedDurak = null },
                     shape = RoundedCornerShape(8.dp),
-                    color = MapDarkCard,
+                    color = MaterialTheme.colorScheme.surfaceVariant,
                     shadowElevation = 8.dp
                 ) {
                     Row(
@@ -434,7 +440,7 @@ fun DuraklarScreen(
                     ) {
                         Text(
                             text = durak.durakAdi.ifEmpty { "Durak ${durak.durakId}" },
-                            color = Color.White,
+                            color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 13.sp,
                             maxLines = 1
@@ -442,7 +448,7 @@ fun DuraklarScreen(
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "•",
-                            color = Color.White.copy(alpha = 0.5f),
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.35f),
                             fontSize = 10.sp
                         )
                         Spacer(modifier = Modifier.width(8.dp))
@@ -477,7 +483,7 @@ fun DuraklarScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = errorMessage,
-                    color = Color.White.copy(alpha = 0.9f),
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
                     textAlign = TextAlign.Center,
                     fontSize = 16.sp
                 )

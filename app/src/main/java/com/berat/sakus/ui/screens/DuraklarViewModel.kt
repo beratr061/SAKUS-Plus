@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlin.coroutines.resume
 import kotlinx.coroutines.withContext
 
 class DuraklarViewModel(application: Application) : AndroidViewModel(application) {
@@ -63,10 +64,10 @@ class DuraklarViewModel(application: Application) : AndroidViewModel(application
         if (!hasPermission) return
         viewModelScope.launch {
             try {
-                val loc = kotlinx.coroutines.suspendCancellableCoroutine<android.location.Location?> { cont ->
+                val loc = kotlin.coroutines.suspendCoroutine<android.location.Location?> { cont ->
                     locationClient.lastLocation
-                        .addOnSuccessListener { cont.resume(it, null) }
-                        .addOnFailureListener { cont.resume(null, null) }
+                        .addOnSuccessListener { cont.resume(it) }
+                        .addOnFailureListener { cont.resume(null) }
                 }
                 loc?.let { _userLocation.value = LatLng(it.latitude, it.longitude) }
             } catch (_: Exception) {}
