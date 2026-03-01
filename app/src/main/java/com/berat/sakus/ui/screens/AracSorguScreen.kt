@@ -403,11 +403,14 @@ private fun LiveTrackingBanner() {
 @Composable
 private fun AracSonucKarti(arac: AracKonumu) {
     val durumRenk = when (arac.durum.uppercase()) {
-        "AT_STOP" -> Color(0xFF4CAF50)
+        "AT_STOP", "DWELL" -> Color(0xFF4CAF50)
         "IN_TRAFFIC" -> Color(0xFFFFA726)
-        "MOVING", "IN_MOTION" -> Color(0xFF42A5F5)
-        "OUT_OF_SERVICE" -> Color(0xFFE53935)
-        "IDLE" -> Color(0xFF9E9E9E)
+        "MOVING", "IN_MOTION", "CRUISE" -> Color(0xFF42A5F5)
+        "OUT_OF_SERVICE", "DEADHEAD" -> Color(0xFFE53935)
+        "IDLE", "LAYOVER" -> Color(0xFF9E9E9E)
+        "DEPARTING" -> Color(0xFF66BB6A)
+        "APPROACH", "ARRIVING" -> Color(0xFFAB47BC)
+        "OFF_ROUTE" -> Color(0xFFFF7043)
         else -> Color(0xFF78909C)
     }
 

@@ -32,6 +32,15 @@ data class AracKonumu(
         "IDLE" -> "Beklemede"
         "STOPPED" -> "Durdu"
         "NOT_REPORTING" -> "Sinyal Yok"
+        "DEPARTING" -> "Kalkıyor"
+        "CRUISE" -> "Seyir Halinde"
+        "APPROACH" -> "Yaklaşıyor"
+        "ARRIVING" -> "Varıyor"
+        "DWELL" -> "Durakta Bekliyor"
+        "LAYOVER" -> "Mola"
+        "DEADHEAD" -> "Boş Sefer"
+        "OFF_ROUTE" -> "Güzergah Dışı"
+        "UNKNOWN" -> "Bilinmiyor"
         else -> durum.replace("_", " ")
             .lowercase()
             .replaceFirstChar { it.uppercase() }
