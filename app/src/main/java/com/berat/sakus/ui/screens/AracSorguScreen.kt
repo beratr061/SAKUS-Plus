@@ -48,20 +48,24 @@ fun AracSorguScreen(
     val state by viewModel.state.collectAsState()
     val focusManager = LocalFocusManager.current
 
-    DisposableEffect(Unit) {
-        onDispose {
-            viewModel.durdur()
-        }
-    }
-
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        "Araç Sorgula",
-                        fontWeight = FontWeight.SemiBold
-                    )
+                    Column {
+                        Text(
+                            "Araç Sorgula",
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 18.sp
+                        )
+                        if (state.tumAraclar.isNotEmpty()) {
+                            Text(
+                                "${state.tumAraclar.size} aktif araç",
+                                fontSize = 12.sp,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                            )
+                        }
+                    }
                 },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
@@ -79,7 +83,7 @@ fun AracSorguScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Search Section
+            // Arama bölümü
             SearchSection(
                 sorguMetni = state.sorguMetni,
                 sorguTipi = state.sorguTipi,
@@ -87,14 +91,11 @@ fun AracSorguScreen(
                 canliTakip = state.canliTakip,
                 onSorguMetniDegisti = { viewModel.sorguMetniGuncelle(it) },
                 onSorguTipiDegisti = { viewModel.sorguTipiGuncelle(it) },
-                onSorgula = {
-                    focusManager.clearFocus()
-                    viewModel.sorgula()
-                },
+                onSorgula = { focusManager.clearFocus() },
                 onDurdur = { viewModel.durdur() }
             )
 
-            // Error Message
+            // Hata mesajı
             AnimatedVisibility(
                 visible = state.hata != null,
                 enter = fadeIn() + slideInVertically(),
@@ -131,7 +132,7 @@ fun AracSorguScreen(
                 }
             }
 
-            // Live Tracking Indicator
+            // Canlı takip göstergesi
             AnimatedVisibility(
                 visible = state.canliTakip,
                 enter = fadeIn() + expandVertically(),
@@ -140,9 +141,25 @@ fun AracSorguScreen(
                 LiveTrackingBanner()
             }
 
-            // Results
-            if (state.sonuclar.isEmpty() && !state.yukleniyor && state.hata == null) {
-                EmptyState(hasSorgu = state.sorguMetni.isNotEmpty() && state.canliTakip)
+            // Yükleniyor
+            if (state.yukleniyor && state.tumAraclar.isEmpty()) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(32.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    CircularProgressIndicator(color = PrimaryPurple)
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        "Araçlar yükleniyor...",
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                        fontSize = 14.sp
+                    )
+                }
+            } else if (state.filtrelenmis.isEmpty() && state.sorguMetni.isNotEmpty()) {
+                EmptyState(hasSorgu = true)
             } else {
                 LazyColumn(
                     modifier = Modifier
@@ -151,10 +168,15 @@ fun AracSorguScreen(
                     contentPadding = PaddingValues(top = 8.dp, bottom = 24.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    if (state.sonuclar.isNotEmpty()) {
+                    if (state.filtrelenmis.isNotEmpty()) {
                         item {
+                            val countText = if (state.sorguMetni.isNotEmpty()) {
+                                "${state.filtrelenmis.size} / ${state.tumAraclar.size} araç eşleşti"
+                            } else {
+                                "${state.filtrelenmis.size} aktif araç"
+                            }
                             Text(
-                                text = "${state.sonuclar.size} araç bulundu",
+                                text = countText,
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Medium,
                                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
@@ -162,7 +184,7 @@ fun AracSorguScreen(
                             )
                         }
                     }
-                    items(state.sonuclar, key = { "${it.plaka}_${it.aracNumarasi}" }) { arac ->
+                    items(state.filtrelenmis, key = { "${it.plaka}_${it.aracNumarasi}" }) { arac ->
                         AracSonucKarti(
                             arac = arac,
                             onClick = { onNavigateToDetail(arac.aracNumarasi) }
@@ -267,62 +289,6 @@ private fun SearchSection(
                 )
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
-
-            // Sorgula / Durdur Butonu
-            if (canliTakip) {
-                OutlinedButton(
-                    onClick = onDurdur,
-                    modifier = Modifier.fillMaxWidth().height(48.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    border = ButtonDefaults.outlinedButtonBorder(enabled = true).copy(
-                        brush = Brush.horizontalGradient(
-                            listOf(Color(0xFFE53935), Color(0xFFFF5252))
-                        )
-                    )
-                ) {
-                    Icon(
-                        Icons.Default.Stop,
-                        contentDescription = null,
-                        tint = Color(0xFFE53935),
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        "Canlı Takibi Durdur",
-                        color = Color(0xFFE53935),
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
-            } else {
-                Button(
-                    onClick = onSorgula,
-                    modifier = Modifier.fillMaxWidth().height(48.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = PrimaryPurple),
-                    enabled = !yukleniyor && sorguMetni.isNotBlank()
-                ) {
-                    if (yukleniyor) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(20.dp),
-                            color = Color.White,
-                            strokeWidth = 2.dp
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                    } else {
-                        Icon(
-                            Icons.Default.Search,
-                            contentDescription = null,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                    }
-                    Text(
-                        if (yukleniyor) "Aranıyor..." else "Canlı Sorgula",
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
-            }
         }
     }
 }

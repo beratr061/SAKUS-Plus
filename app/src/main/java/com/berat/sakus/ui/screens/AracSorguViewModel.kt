@@ -19,8 +19,9 @@ enum class SorguTipi {
 data class AracSorguState(
     val sorguMetni: String = "",
     val sorguTipi: SorguTipi = SorguTipi.PLAKA,
-    val sonuclar: List<AracKonumu> = emptyList(),
-    val yukleniyor: Boolean = false,
+    val tumAraclar: List<AracKonumu> = emptyList(),
+    val filtrelenmis: List<AracKonumu> = emptyList(),
+    val yukleniyor: Boolean = true,
     val hata: String? = null,
     val canliTakip: Boolean = false
 )
@@ -33,33 +34,16 @@ class AracSorguViewModel(application: Application) : AndroidViewModel(applicatio
     
     private var streamJob: Job? = null
 
-    fun sorguMetniGuncelle(metin: String) {
-        _state.value = _state.value.copy(sorguMetni = metin, hata = null)
+    init {
+        baslat()
     }
 
-    fun sorguTipiGuncelle(tip: SorguTipi) {
-        _state.value = _state.value.copy(sorguTipi = tip, hata = null)
-    }
-
-    fun sorgula() {
-        val metin = _state.value.sorguMetni.trim()
-        if (metin.isEmpty()) {
-            _state.value = _state.value.copy(hata = "Lütfen bir plaka veya kapı numarası girin")
-            return
-        }
-        
-        // Önceki stream'i durdur
+    private fun baslat() {
         streamJob?.cancel()
-        
-        _state.value = _state.value.copy(
-            yukleniyor = true,
-            hata = null,
-            sonuclar = emptyList(),
-            canliTakip = true
-        )
-        
+        _state.value = _state.value.copy(yukleniyor = true, hata = null, canliTakip = true)
+
         streamJob = viewModelScope.launch {
-            api.aracSorgula(metin)
+            api.tumAraclariStreamle()
                 .catch { e ->
                     _state.value = _state.value.copy(
                         yukleniyor = false,
@@ -68,12 +52,51 @@ class AracSorguViewModel(application: Application) : AndroidViewModel(applicatio
                     )
                 }
                 .collect { araclar ->
+                    val sirali = araclar.sortedWith(compareBy({ it.plaka }, { it.aracNumarasi }))
                     _state.value = _state.value.copy(
-                        sonuclar = araclar.sortedWith(compareBy({ it.plaka }, { it.aracNumarasi })),
+                        tumAraclar = sirali,
+                        filtrelenmis = filtrele(sirali, _state.value.sorguMetni, _state.value.sorguTipi),
                         yukleniyor = false
                     )
                 }
         }
+    }
+
+    fun sorguMetniGuncelle(metin: String) {
+        _state.value = _state.value.copy(
+            sorguMetni = metin,
+            hata = null,
+            filtrelenmis = filtrele(_state.value.tumAraclar, metin, _state.value.sorguTipi)
+        )
+    }
+
+    fun sorguTipiGuncelle(tip: SorguTipi) {
+        _state.value = _state.value.copy(
+            sorguTipi = tip,
+            hata = null,
+            filtrelenmis = filtrele(_state.value.tumAraclar, _state.value.sorguMetni, tip)
+        )
+    }
+
+    private fun filtrele(araclar: List<AracKonumu>, metin: String, tip: SorguTipi): List<AracKonumu> {
+        val sorgu = metin.trim().uppercase().replace("\\s+".toRegex(), " ")
+        if (sorgu.isEmpty()) return araclar
+
+        return araclar.filter { arac ->
+            when (tip) {
+                SorguTipi.PLAKA -> {
+                    val plaka = arac.plaka.uppercase().replace("\\s+".toRegex(), " ")
+                    plaka.contains(sorgu) || sorgu.contains(plaka.replace(" ", "")) && plaka.isNotEmpty()
+                }
+                SorguTipi.KAPI_NO -> {
+                    arac.aracNumarasi.toString().contains(sorgu)
+                }
+            }
+        }
+    }
+
+    fun yenidenBaglan() {
+        baslat()
     }
 
     fun durdur() {

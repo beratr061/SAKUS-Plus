@@ -440,6 +440,89 @@ class SbbApiServisi private constructor(private val context: Context) {
         }
     }.flowOn(Dispatchers.IO)
 
+    /**
+     * SSE stream üzerinden TÜM araçları akış olarak döndürür (filtresiz).
+     * Araç sorgulama ekranında tüm araçları listelemek için kullanılır.
+     */
+    fun tumAraclariStreamle(): Flow<List<AracKonumu>> = flow {
+        while (currentCoroutineContext().isActive) {
+            var reader: BufferedReader? = null
+            try {
+                val request = Request.Builder()
+                    .url(STREAM_URL)
+                    .header("Origin", "https://ulasim.sakarya.bel.tr")
+                    .header("Referer", "https://ulasim.sakarya.bel.tr")
+                    .header("User-Agent", "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36")
+                    .header("Accept", "text/event-stream")
+                    .build()
+
+                val response = streamClient.newCall(request).execute()
+                if (!response.isSuccessful) {
+                    Log.e(TAG, "SSE tüm araçlar bağlantı hatası: ${response.code}")
+                    response.close()
+                    delay(2000)
+                    continue
+                }
+
+                reader = response.body?.byteStream()?.bufferedReader()
+                if (reader == null) {
+                    response.close()
+                    delay(2000)
+                    continue
+                }
+
+                Log.d(TAG, "SSE tüm araçlar stream bağlantısı kuruldu")
+
+                var line: String?
+                var currentEventType = ""
+                while (currentCoroutineContext().isActive) {
+                    line = reader.readLine()
+                    if (line == null) {
+                        Log.w(TAG, "SSE tüm araçlar stream kapandı, yeniden bağlanılıyor...")
+                        break
+                    }
+
+                    if (line.startsWith("event:")) {
+                        currentEventType = line.removePrefix("event:").trim()
+                        continue
+                    }
+
+                    if (line.startsWith("data:")) {
+                        val jsonStr = line.removePrefix("data:").trim()
+                        if (jsonStr.isEmpty()) continue
+
+                        if (currentEventType == "server-disconnect") {
+                            Log.w(TAG, "SSE tüm araçlar sunucu bağlantıyı kesti — yeniden bağlanılıyor...")
+                            currentEventType = ""
+                            break
+                        }
+
+                        currentEventType = ""
+                        try {
+                            val parsed = JsonParser.parseString(jsonStr)
+                            if (parsed.isJsonArray) {
+                                val araclar = parsed.asJsonArray
+                                    .filter { it.isJsonObject }
+                                    .mapNotNull { AracKonumu.fromJson(it.asJsonObject) }
+
+                                emit(araclar)
+                            }
+                        } catch (e: Exception) {
+                            Log.e(TAG, "SSE tüm araçlar veri ayrıştırma hatası: ${e.message}")
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (currentCoroutineContext().isActive) {
+                    Log.e(TAG, "SSE tüm araçlar stream hatası: ${e.message}")
+                    delay(2000)
+                }
+            } finally {
+                try { reader?.close() } catch (_: Exception) {}
+            }
+        }
+    }.flowOn(Dispatchers.IO)
+
     // 8. Araç Sorgulama (plaka veya kapı numarası ile)
     
     /**
