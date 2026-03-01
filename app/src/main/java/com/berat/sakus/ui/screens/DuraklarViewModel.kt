@@ -65,8 +65,8 @@ class DuraklarViewModel(application: Application) : AndroidViewModel(application
             try {
                 val loc = kotlinx.coroutines.suspendCancellableCoroutine<android.location.Location?> { cont ->
                     locationClient.lastLocation
-                        .addOnSuccessListener { cont.resume(it) {} }
-                        .addOnFailureListener { cont.resume(null) {} }
+                        .addOnSuccessListener { cont.resume(it, null) }
+                        .addOnFailureListener { cont.resume(null, null) }
                 }
                 loc?.let { _userLocation.value = LatLng(it.latitude, it.longitude) }
             } catch (_: Exception) {}

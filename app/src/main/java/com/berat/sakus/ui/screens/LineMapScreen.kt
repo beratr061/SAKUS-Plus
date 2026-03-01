@@ -38,7 +38,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.core.graphics.createBitmap
 import com.berat.sakus.R
 import com.berat.sakus.data.*
-import com.berat.sakus.theme.ThemeManager
+import com.berat.sakus.ui.theme.ThemeManager
+import com.berat.sakus.ui.theme.MapDarkBackground
+import com.berat.sakus.ui.theme.MapDarkCard
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.compose.*
@@ -251,7 +253,7 @@ fun LineMapScreen(
         scaffoldState = bottomSheetState,
         sheetPeekHeight = 140.dp + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
         sheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-        sheetContainerColor = Color(0xFF1E2126),
+        sheetContainerColor = MapDarkBackground,
         sheetDragHandle = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Spacer(modifier = Modifier.height(10.dp))
@@ -363,7 +365,7 @@ fun LineMapScreen(
         }
     },
     content = { paddingValues ->
-        Box(modifier = Modifier.fillMaxSize().background(Color(0xFF1E2126))) {
+        Box(modifier = Modifier.fillMaxSize().background(MapDarkBackground)) {
             if (isMapReady) {
                 GoogleMap(
                 modifier = Modifier.fillMaxSize(),
@@ -437,7 +439,7 @@ fun LineMapScreen(
                 activeVehicles.forEach { v ->
                     key(v.plaka) {
                         val targetLatLng = LatLng(v.lat, v.lng)
-                        val markerState = rememberMarkerState(position = targetLatLng)
+                        val markerState = remember { MarkerState(position = targetLatLng) }
                         var previousLatLng by remember { mutableStateOf(targetLatLng) }
 
                         // Sadece pozisyon hedefini dinle, UI recomposition'ı atlayıp state'e gömülü yaz!
@@ -502,7 +504,7 @@ fun LineMapScreen(
                     onClick = onNavigateBack,
                     modifier = Modifier.size(48.dp),
                     shape = RoundedCornerShape(12.dp),
-                    color = Color(0xFF1E2126)
+                    color = MapDarkBackground
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
@@ -514,7 +516,7 @@ fun LineMapScreen(
                 if (vehicles.isNotEmpty()) {
                     Row(
                         modifier = Modifier
-                            .background(Color(0xFF1E2126), RoundedCornerShape(12.dp))
+                            .background(MapDarkBackground, RoundedCornerShape(12.dp))
                             .padding(horizontal = 10.dp, vertical = 6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -537,7 +539,7 @@ fun LineMapScreen(
                             .width(113.dp)
                             .height(48.dp),
                         shape = RoundedCornerShape(12.dp),
-                        color = Color(0xFF1E2126)
+                        color = MapDarkBackground
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
@@ -619,7 +621,7 @@ fun LineMapScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(80.dp)
-                            .background(Color(0xFF1E2126), RoundedCornerShape(16.dp))
+                            .background(MapDarkBackground, RoundedCornerShape(16.dp))
                             .padding(horizontal = 12.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -673,395 +675,4 @@ fun LineMapScreen(
             onNavigateDuyuruDetail(duyuru)
         }
     )
-}
-
-@Composable
-fun MapButton(painter: androidx.compose.ui.graphics.painter.Painter, iconTint: Color = Color.White, onTap: () -> Unit) {
-    Surface(
-        onClick = onTap,
-        modifier = Modifier.size(48.dp),
-        shape = RoundedCornerShape(12.dp),
-        color = Color(0xFF1E2126)
-    ) {
-        Box(contentAlignment = Alignment.Center) {
-            Icon(painter, contentDescription = null, tint = iconTint, modifier = Modifier.size(26.dp))
-        }
-    }
-}
-
-class TooltipShape(
-    private val cornerRadiusDp: Float = 8f,
-    private val arrowWidthDp: Float = 16f,
-    private val arrowHeightDp: Float = 8f
-) : androidx.compose.ui.graphics.Shape {
-    override fun createOutline(
-        size: androidx.compose.ui.geometry.Size,
-        layoutDirection: androidx.compose.ui.unit.LayoutDirection,
-        density: androidx.compose.ui.unit.Density
-    ): androidx.compose.ui.graphics.Outline {
-        val r = cornerRadiusDp * density.density
-        val aw = arrowWidthDp * density.density
-        val ah = arrowHeightDp * density.density
-        val rectHeight = size.height - ah
-        
-        val path = androidx.compose.ui.graphics.Path().apply {
-            moveTo(0f, r)
-            arcTo(androidx.compose.ui.geometry.Rect(0f, 0f, 2 * r, 2 * r), 180f, 90f, false)
-            lineTo(size.width - r, 0f)
-            arcTo(androidx.compose.ui.geometry.Rect(size.width - 2 * r, 0f, size.width, 2 * r), -90f, 90f, false)
-            lineTo(size.width, rectHeight - r)
-            arcTo(androidx.compose.ui.geometry.Rect(size.width - 2 * r, rectHeight - 2 * r, size.width, rectHeight), 0f, 90f, false)
-            
-            lineTo((size.width + aw) / 2f, rectHeight)
-            lineTo(size.width / 2f, size.height)
-            lineTo((size.width - aw) / 2f, rectHeight)
-            
-            lineTo(r, rectHeight)
-            arcTo(androidx.compose.ui.geometry.Rect(0f, rectHeight - 2 * r, 2 * r, rectHeight), 90f, 90f, false)
-            lineTo(0f, r)
-            close()
-        }
-        return androidx.compose.ui.graphics.Outline.Generic(path)
-    }
-}
-
-@Composable
-fun VehicleTooltip(v: AracKonumu) {
-    val tooltipShape = remember { TooltipShape() }
-    
-    Box(
-        modifier = Modifier
-            .padding(bottom = 36.dp)
-            .shadow(6.dp, tooltipShape)
-            .background(Color(0xFF2A2D34), tooltipShape)
-            .border(1.dp, Color.White.copy(alpha = 0.2f), tooltipShape)
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .padding(bottom = 8.dp) // Accounts for the arrow drop
-                .padding(horizontal = 12.dp, vertical = 8.dp)
-                .width(150.dp)
-        ) {
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Icon(Icons.Default.DirectionsBus, contentDescription = null, tint = Color.White.copy(alpha=0.7f), modifier = Modifier.size(20.dp))
-                Icon(Icons.Default.Speed, contentDescription = null, tint = Color.White.copy(alpha=0.7f), modifier = Modifier.size(20.dp))
-                Icon(Icons.Default.Sync, contentDescription = null, tint = Color.White.copy(alpha=0.7f), modifier = Modifier.size(20.dp))
-            }
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp), horizontalAlignment = Alignment.End) {
-                Text(
-                    text = "${v.plaka} - ${if (v.aracNumarasi > 0) v.aracNumarasi.toString() else "Yok"}",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 15.sp
-                )
-                Text(v.hizFormati, color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
-                Text("Canlı", color = Color.White.copy(alpha=0.7f), fontSize = 13.sp)
-            }
-        }
-    }
-}
-
-// Distance Helper
-fun distanceBetween(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
-    val earthRadius = 6371000.0 // meters
-    val dLat = Math.toRadians(lat2 - lat1)
-    val dLon = Math.toRadians(lon2 - lon1)
-    val a = sin(dLat / 2) * sin(dLat / 2) +
-            cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) *
-            sin(dLon / 2) * sin(dLon / 2)
-    val c = 2 * atan2(sqrt(a), sqrt(1 - a))
-    return earthRadius * c
-}
-
-object MapAssets {
-    private var directionalArrowBitmap: Bitmap? = null
-
-    fun getDirectionalArrowBitmap(): Bitmap {
-        directionalArrowBitmap?.let { return it }
-
-        val boxWidth = 100f
-        val boxHeight = 250f 
-        
-        val bitmap = createBitmap(boxWidth.toInt(), boxHeight.toInt(), Bitmap.Config.ARGB_8888)
-        val canvas = android.graphics.Canvas(bitmap)
-        
-        val arrowPaint = android.graphics.Paint().apply {
-            color = android.graphics.Color.WHITE
-            style = android.graphics.Paint.Style.FILL
-            isAntiAlias = true
-        }
-        
-        val path = android.graphics.Path().apply {
-            moveTo(0f, 87f)
-            lineTo(211f, 87f)
-            lineTo(211f, 0f)
-            lineTo(420f, 121f)
-            lineTo(211f, 244f)
-            lineTo(211f, 157f)
-            lineTo(0f, 157f)
-            close()
-        }
-        
-        val matrix = android.graphics.Matrix()
-        matrix.postTranslate(-210f, -122f)
-        matrix.postRotate(90f)
-        val scale = 70f / 244f 
-        matrix.postScale(scale, scale)
-        matrix.postTranslate(boxWidth / 2f, boxHeight / 2f)
-        
-        path.transform(matrix)
-        canvas.drawPath(path, arrowPaint)
-        
-        directionalArrowBitmap = bitmap
-        return bitmap
-    }
-
-    fun getBitmapFromVector(context: Context, vectorResId: Int, targetHeightPx: Int): Bitmap? {
-        val drawable = androidx.core.content.ContextCompat.getDrawable(context, vectorResId) ?: return null
-        val ratio = drawable.intrinsicWidth.toFloat() / drawable.intrinsicHeight.toFloat()
-        val targetWidthPx = (targetHeightPx * ratio).toInt()
-        
-        drawable.setBounds(0, 0, targetWidthPx, targetHeightPx)
-        val bm = createBitmap(targetWidthPx, targetHeightPx, Bitmap.Config.ARGB_8888)
-        val canvas = android.graphics.Canvas(bm)
-        drawable.draw(canvas)
-        return bm
-    }
-}
-
-// Modals
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ScheduleDialog(hat: HatBilgisi, viewModel: LineMapViewModel, onDismiss: () -> Unit) {
-    val isLoading by viewModel.isScheduleLoading.collectAsState()
-    val schedules by viewModel.schedules.collectAsState()
-    
-    LaunchedEffect(Unit) {
-        viewModel.loadSchedules(hat.id)
-    }
-
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        containerColor = Color(0xFF1E2126),
-        modifier = Modifier.fillMaxHeight(0.8f)
-    ) {
-        if (isLoading) {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
-        } else {
-            var selectedTabIndex by remember { mutableIntStateOf(0) }
-            Column {
-                TabRow(
-                    selectedTabIndex = selectedTabIndex,
-                    containerColor = Color.Transparent,
-                    contentColor = Color.White,
-                    indicator = { tabPositions ->
-                        TabRowDefaults.SecondaryIndicator(
-                            Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-                            color = Color.Blue
-                        )
-                    }
-                ) {
-                    Tab(selected = selectedTabIndex == 0, onClick = { selectedTabIndex = 0 }, text = { Text("Hafta İçi") })
-                    Tab(selected = selectedTabIndex == 1, onClick = { selectedTabIndex = 1 }, text = { Text("Cumartesi") })
-                    Tab(selected = selectedTabIndex == 2, onClick = { selectedTabIndex = 2 }, text = { Text("Pazar") })
-                }
-                
-                val currentData = schedules.getOrNull(selectedTabIndex)
-                val seferlerSorted = remember(currentData) {
-                    (currentData?.seferler ?: emptyList()).sortedBy { it.yon }
-                }
-                if (currentData == null || seferlerSorted.isEmpty()) {
-                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Text("Sefer bulunamadı", color = Color.White) }
-                } else {
-                    LazyColumn(Modifier.fillMaxSize().padding(16.dp)) {
-                        itemsIndexed(
-                            items = seferlerSorted,
-                            key = { index, route -> "${route.guzergahAdi}_$index" }
-                        ) { index, route ->
-                            Column {
-                                val yonLabel = if (route.yon == 0) "Gidiş" else "Dönüş"
-                                Text("${route.guzergahAdi} ($yonLabel)", color = Color(0xFF448AFF), fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                                Spacer(Modifier.height(8.dp))
-                                Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.fillMaxWidth()) {
-                                    route.detaylar.chunked(4).forEach { chunk ->
-                                        Column {
-                                            chunk.forEach { detay ->
-                                                Box(
-                                                    modifier = Modifier
-                                                        .padding(bottom=4.dp)
-                                                        .background(Color.White.copy(alpha=0.1f), RoundedCornerShape(8.dp))
-                                                        .padding(horizontal = 12.dp, vertical = 6.dp)
-                                                ) {
-                                                    Text(detay.baslangicSaat, color = Color.White, fontSize = 14.sp)
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                if (index < seferlerSorted.size - 1) HorizontalDivider(color = Color.White.copy(alpha=0.24f), modifier = Modifier.padding(vertical = 12.dp))
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun FaresDialog(hat: HatBilgisi, viewModel: LineMapViewModel, onDismiss: () -> Unit) {
-    val isLoading by viewModel.isFaresLoading.collectAsState()
-    val fares by viewModel.fares.collectAsState()
-    
-    LaunchedEffect(Unit) {
-        viewModel.loadFares(hat.id, hat.aracTipId)
-    }
-
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        containerColor = Color(0xFF1E2126),
-    ) {
-        if (isLoading) {
-            Box(Modifier.fillMaxWidth().height(200.dp), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
-        } else if (fares == null || fares?.gruplar?.isEmpty() == true) {
-            Box(Modifier.fillMaxWidth().height(200.dp), contentAlignment = Alignment.Center) { Text("Tarife bilgisi bulunamadı.", color = Color.White) }
-        } else {
-            Column(Modifier.padding(16.dp)) {
-                Text("Fiyat Tarifesi", color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Spacer(Modifier.height(10.dp))
-                LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                    val groupped = fares?.gruplar?.flatMap { group -> 
-                        group.guzergahlar.map { route -> Pair(group, route) } 
-                    } ?: emptyList()
-                    
-                    itemsIndexed(
-                        items = groupped,
-                        key = { index, pair -> "${pair.first.ad}_${pair.second.guzergahAdi}_$index" }
-                    ) { index, (group, route) ->
-                        // Sadece gruptaki ilk öğede grup adını göster
-                        if (index == 0 || groupped[index - 1].first.ad != group.ad) {
-                            Text(group.ad, color = Color(0xFF448AFF), fontWeight = FontWeight.Bold, modifier = Modifier.padding(vertical = 8.dp))
-                        }
-                        
-                        Card(
-                            colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha=0.1f)),
-                            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
-                        ) {
-                            Column(Modifier.padding(16.dp)) {
-                                Text(route.guzergahAdi, color = Color.White, fontWeight = FontWeight.Bold)
-                                Spacer(Modifier.height(8.dp))
-                                route.ucretler.forEach { u ->
-                                    val tipAdi = fares?.tarifeTipleri?.find { it.id == u.tarifeTipId }?.tipAdi ?: "Kart Tipi: ${u.tarifeTipId}"
-                                    Row(Modifier.fillMaxWidth().padding(vertical=4.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-                                        Text(tipAdi, color = Color.White.copy(alpha=0.7f))
-                                        Text("${u.sonUcret} ₺", color = Color(0xFFFFC107), fontWeight = FontWeight.Bold)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun LineDuyurularFullScreen(
-    hat: HatBilgisi,
-    viewModel: LineMapViewModel,
-    onDismiss: () -> Unit,
-    onDuyuruClick: (Duyuru) -> Unit
-) {
-    val isLoading by viewModel.isAnnouncementsLoading.collectAsState()
-    val announcements by viewModel.announcements.collectAsState()
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFF1E2126))
-    ) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            TopAppBar(
-                title = {
-                    Text(
-                        "${hat.hatNumarasi} Hat Duyuruları",
-                        color = Color.White,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onDismiss) {
-                        Icon(
-                            Icons.Default.ArrowBack,
-                            contentDescription = "Geri",
-                            tint = Color.White
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF1E2126))
-            )
-            HorizontalDivider(color = Color.White.copy(alpha = 0.12f))
-            if (isLoading) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator(color = Color.White)
-                }
-            } else if (announcements.isEmpty()) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        "Bu hat için duyuru bulunamadı",
-                        color = Color.White.copy(alpha = 0.54f),
-                        fontSize = 16.sp
-                    )
-                }
-            } else {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    items(announcements, key = { it.id }) { duyuru ->
-                        Surface(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { onDuyuruClick(duyuru) },
-                            shape = RoundedCornerShape(12.dp),
-                            color = Color.White.copy(alpha = 0.08f)
-                        ) {
-                            Column(modifier = Modifier.padding(16.dp)) {
-                                Text(
-                                    text = duyuru.baslik,
-                                    color = Color.White,
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    maxLines = 2,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                                Spacer(modifier = Modifier.height(8.dp))
-                                Text(
-                                    text = duyuru.duzMetin,
-                                    color = Color.White.copy(alpha = 0.7f),
-                                    fontSize = 14.sp,
-                                    maxLines = 3,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 }

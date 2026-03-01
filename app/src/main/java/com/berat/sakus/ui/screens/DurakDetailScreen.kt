@@ -24,7 +24,8 @@ import androidx.compose.ui.unit.sp
 import com.berat.sakus.R
 import com.berat.sakus.data.DurakBilgisi
 import com.berat.sakus.data.DurakVarisi
-import com.berat.sakus.theme.ThemeManager
+import com.berat.sakus.ui.theme.ThemeManager
+import com.berat.sakus.ui.theme.MapDarkBackground
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
@@ -124,7 +125,7 @@ fun DurakDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(220.dp)
-                    .background(Color(0xFF1E2126))
+                    .background(MapDarkBackground)
             ) {
                 if (isMapReady) {
                     GoogleMap(

@@ -33,7 +33,9 @@ import androidx.compose.ui.res.painterResource
 import com.berat.sakus.R
 import com.berat.sakus.data.DurakBilgisi
 import com.berat.sakus.data.DurakClusterItem
-import com.berat.sakus.theme.ThemeManager
+import com.berat.sakus.ui.theme.ThemeManager
+import com.berat.sakus.ui.theme.MapDarkBackground
+import com.berat.sakus.ui.theme.MapDarkCard
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -48,7 +50,6 @@ private val SAKARYA_CENTER = LatLng(40.7750, 30.3950)
 private const val DEFAULT_ZOOM = 12f
 
 @OptIn(ExperimentalMaterial3Api::class)
-@androidx.compose.material3.ExperimentalMaterial3Api
 @Composable
 fun DuraklarScreen(
     onNavigateBack: () -> Unit,
@@ -148,7 +149,7 @@ fun DuraklarScreen(
         scaffoldState = bottomSheetScaffoldState,
         sheetPeekHeight = 180.dp + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
         sheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-        sheetContainerColor = Color(0xFF1E2126),
+        sheetContainerColor = MapDarkBackground,
         sheetDragHandle = {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Spacer(modifier = Modifier.height(10.dp))
@@ -179,7 +180,7 @@ fun DuraklarScreen(
                         modifier = Modifier
                             .fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
-                        color = Color(0xFF2A2D34)
+                        color = MapDarkCard
                     ) {
                         Row(
                             modifier = Modifier.padding(16.dp),
@@ -221,7 +222,7 @@ fun DuraklarScreen(
             }
         }
     ) {
-    Box(modifier = Modifier.fillMaxSize().background(Color(0xFF1E2126))) {
+    Box(modifier = Modifier.fillMaxSize().background(MapDarkBackground)) {
         if (isMapReady) {
             GoogleMap(
                 modifier = Modifier.fillMaxSize(),
@@ -386,7 +387,7 @@ fun DuraklarScreen(
                     end = 16.dp
                 )
                 .size(48.dp)
-                .background(Color(0xFF2A2D34), RoundedCornerShape(12.dp))
+                .background(MapDarkCard, RoundedCornerShape(12.dp))
                 .clickable {
                     if (userLocation != null) {
                         requestCenterOnUser = true
@@ -424,7 +425,7 @@ fun DuraklarScreen(
                         .padding(horizontal = 16.dp)
                         .clickable { selectedDurak = null },
                     shape = RoundedCornerShape(8.dp),
-                    color = Color(0xFF2A2D34),
+                    color = MapDarkCard,
                     shadowElevation = 8.dp
                 ) {
                     Row(

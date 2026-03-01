@@ -18,3 +18,11 @@ val LightSurface = Color(0xFFFFFFFF)
 val LightTextPrimary = Color(0xFF000000)
 val LightTextSecondary = Color(0xFF8E8E93)
 val LightBorder = Color(0xFFE5E5EA)
+
+// Map & Detail Screen Colors (Dark)
+val MapDarkBackground = Color(0xFF1E2126)
+val MapDarkCard = Color(0xFF2A2D34)
+
+// Drawer Colors
+val DrawerBackground = Color(0xFF1C1C1C)
+val DrawerDivider = Color(0xFF333333)

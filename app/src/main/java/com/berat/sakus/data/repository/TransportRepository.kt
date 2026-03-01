@@ -258,14 +258,7 @@ class TransportRepository private constructor(context: Context) {
         return@withContext fetchAndCacheTarife(hatId, aracTipId)
     }
 
-    suspend fun syncTarife(hatId: Int, aracTipId: Int): Boolean = withContext(Dispatchers.IO) {
-        try {
-            fetchAndCacheTarife(hatId, aracTipId) != null
-        } catch (e: Exception) {
-            Log.e(TAG, "Tarife senkronizasyon hatası: ${e.message}")
-            false
-        }
-    }
+
 
     private suspend fun fetchAndCacheTarife(hatId: Int, aracTipId: Int): TarifeBilgisi? {
         try {
@@ -316,13 +309,6 @@ class TransportRepository private constructor(context: Context) {
         true
     }
 
-    /**
-     * Son senkronizasyon zamanını döndürür.
-     */
-    fun getLastSyncTime(): Long {
-        return prefs.getLong(KEY_LAST_HATLAR_SYNC, 0)
-    }
-
     // ──────────────────────────────────────────────
     // TÜM DURAKLAR (Harita için - sayfalı API)
     // ──────────────────────────────────────────────
@@ -335,13 +321,7 @@ class TransportRepository private constructor(context: Context) {
         api.tumDuraklariGetir()
     }
 
-    /**
-     * Tek sayfa durak verisi (drawer sayfalama için).
-     */
-    suspend fun duraklariGetirSayfa(pageNumber: Int, pageSize: Int): List<DurakBilgisi> =
-        withContext(Dispatchers.IO) {
-            api.duraklariGetirSayfa(pageNumber, pageSize)
-        }
+
 
     /**
      * Durağa yaklaşan otobüsleri canlı veriden getirir.

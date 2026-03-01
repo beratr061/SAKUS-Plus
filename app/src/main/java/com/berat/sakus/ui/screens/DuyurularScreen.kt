@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.berat.sakus.data.Duyuru
 import com.berat.sakus.data.SbbApiServisi
-import com.berat.sakus.theme.ThemeManager
+import com.berat.sakus.ui.theme.ThemeManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
@@ -186,7 +186,7 @@ private fun DuyuruItemCard(duyuru: Duyuru, hatAdiFromDb: String?, isDarkTheme: B
     val formattedDate = if (duyuru.baslangicTarih.isNotEmpty()) {
         try {
             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("dd.MM.yyyy", Locale("tr"))
+            val outputFormat = SimpleDateFormat("dd.MM.yyyy", Locale.forLanguageTag("tr"))
             val date = inputFormat.parse(duyuru.baslangicTarih)
             date?.let { outputFormat.format(it) } ?: duyuru.baslangicTarih
         } catch (_: Exception) {

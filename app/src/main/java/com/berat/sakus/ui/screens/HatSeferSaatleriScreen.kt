@@ -29,7 +29,7 @@ private val ColorMainBg = Color(0xFF303030)
 private val ColorStatusBar = Color(0xFF1D1D1D)
 private val ColorCardBg = Color(0xFF222222)
 private val ColorRowBg = Color(0xFF2F2F2F)      // Satır arka planı
-private val ColorPurpleAccent = Color(0xFF64217E)
+private val ColorPurpleAccent = com.berat.sakus.ui.theme.PrimaryPurple
 private val ColorTimeChip = Color(0xFF212121)   // Saat chip arka planı
 
 // Responsive layout - minimal side margins

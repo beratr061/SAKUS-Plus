@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 import com.berat.sakus.R
-import com.berat.sakus.theme.ThemeManager
+import com.berat.sakus.ui.theme.ThemeManager
 import java.util.Calendar
 
 @Composable

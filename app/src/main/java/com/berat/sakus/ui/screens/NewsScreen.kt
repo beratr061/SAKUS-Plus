@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.berat.sakus.data.NewsItem
 import com.berat.sakus.data.SbbApiServisi
-import com.berat.sakus.theme.ThemeManager
+import com.berat.sakus.ui.theme.ThemeManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
@@ -180,7 +180,7 @@ private fun NewsItemCard(haber: NewsItem, isDarkTheme: Boolean, onClick: () -> U
     val formattedDate = if (haber.createdDate.isNotEmpty()) {
         try {
             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("d MMMM yyyy", Locale("tr"))
+            val outputFormat = SimpleDateFormat("d MMMM yyyy", Locale.forLanguageTag("tr"))
             val date = inputFormat.parse(haber.createdDate)
             date?.let { outputFormat.format(it) } ?: haber.createdDate
         } catch (_: Exception) {

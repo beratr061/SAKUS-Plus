@@ -37,6 +37,9 @@ import androidx.core.content.ContextCompat
 import androidx.compose.ui.res.vectorResource
 import com.berat.sakus.R
 import coil3.compose.AsyncImage
+import com.berat.sakus.ui.theme.DrawerBackground
+import com.berat.sakus.ui.theme.DrawerDivider
+import com.berat.sakus.ui.theme.PrimaryPurple
 import kotlinx.coroutines.launch
 
 // Screen width scaling helper simulating Flutter's 's(double val)'
@@ -88,7 +91,7 @@ fun SakusHomeScreen(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet(
-                drawerContainerColor = androidx.compose.ui.graphics.Color(0xFF1C1C1C),
+                drawerContainerColor = DrawerBackground,
                 modifier = Modifier.width(320.dp),
                 drawerShape = RoundedCornerShape(topEnd = 0.dp, bottomEnd = 0.dp)
             ) {
@@ -136,7 +139,7 @@ fun SakusHomeScreen(
 
 @Composable
 private fun TopBar(onOpenDrawer: () -> Unit, onNavigate: (String) -> Unit) {
-    val isDarkTheme by com.berat.sakus.theme.ThemeManager.getInstance(LocalContext.current).isDarkTheme.collectAsState()
+    val isDarkTheme by com.berat.sakus.ui.theme.ThemeManager.getInstance(LocalContext.current).isDarkTheme.collectAsState()
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -258,7 +261,7 @@ private fun Kart54Section() {
                 .align(Alignment.TopEnd)
                 .offset(x = -7.dp, y = 144.dp)
                 .size(width = 83.dp, height = 22.dp)
-                .background(Color(0xFF64217E), RoundedCornerShape(4.dp)),
+                .background(PrimaryPurple, RoundedCornerShape(4.dp)),
             contentAlignment = Alignment.Center
         ) {
             Text(
@@ -369,8 +372,8 @@ private fun MenuCard(iconResId: Int, label: String, modifier: Modifier = Modifie
 
 @Composable
 private fun DrawerContent(onCloseDrawer: () -> Unit, onNavigate: (String) -> Unit) {
-    val bgColor = androidx.compose.ui.graphics.Color(0xFF1C1C1C)
-    val dividerColor = androidx.compose.ui.graphics.Color(0xFF333333)
+    val bgColor = DrawerBackground
+    val dividerColor = DrawerDivider
 
     Column(
         modifier = Modifier

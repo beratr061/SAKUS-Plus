@@ -18,3 +18,11 @@ local.properties
 /.cursor/
 /.idea/
 /temp_aar/
+
+# Keystore files (sensitive)
+*.jks
+*.keystore
+sakus_plus
+
+# Release APK (large binary)
+app/release/

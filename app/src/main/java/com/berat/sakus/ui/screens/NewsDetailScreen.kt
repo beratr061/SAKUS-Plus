@@ -52,7 +52,7 @@ fun NewsDetailScreen(
     val formattedDate = if (haber.createdDate.isNotEmpty()) {
         try {
             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("d MMMM yyyy", Locale("tr"))
+            val outputFormat = SimpleDateFormat("d MMMM yyyy", Locale.forLanguageTag("tr"))
             val date = inputFormat.parse(haber.createdDate)
             date?.let { outputFormat.format(it) } ?: haber.createdDate
         } catch (_: Exception) {

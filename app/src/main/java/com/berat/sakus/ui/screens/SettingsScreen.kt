@@ -11,7 +11,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -57,7 +56,7 @@ fun SettingsScreen(
     onNavigateBack: () -> Unit
 ) {
     val context = LocalContext.current
-    val isDark by com.berat.sakus.theme.ThemeManager.getInstance(context).isDarkTheme.collectAsState()
+    val isDark by com.berat.sakus.ui.theme.ThemeManager.getInstance(context).isDarkTheme.collectAsState()
     val themeColor = MaterialTheme.colorScheme.background
     val textColor = MaterialTheme.colorScheme.onBackground
     val subTextColor = if (isDark) Color.LightGray else Color.DarkGray
@@ -120,7 +119,7 @@ fun SettingsScreen(
                     title = "Karanlık mod",
                     value = if (isDark) "Karanlık" else "Aydınlık",
                     isDark = isDark,
-                    onTap = { com.berat.sakus.theme.ThemeManager.getInstance(context).toggleTheme() }
+                    onTap = { com.berat.sakus.ui.theme.ThemeManager.getInstance(context).toggleTheme() }
                 )
                 Spacer(modifier = Modifier.height(10.dp))
 

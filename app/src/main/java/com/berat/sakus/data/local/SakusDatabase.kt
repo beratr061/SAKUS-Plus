@@ -44,7 +44,7 @@ abstract class SakusDatabase : RoomDatabase() {
                     SakusDatabase::class.java,
                     "sakus_database"
                 )
-                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration(dropAllTables = true)
                     .build()
                     .also { INSTANCE = it }
             }

@@ -38,7 +38,7 @@ object SyncManager {
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
             PERIODIC_SYNC_WORK,
-            ExistingPeriodicWorkPolicy.REPLACE,
+            ExistingPeriodicWorkPolicy.KEEP,
             periodicWork
         )
 
@@ -63,7 +63,7 @@ object SyncManager {
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
             NEWS_CHECK_WORK,
-            ExistingPeriodicWorkPolicy.REPLACE,
+            ExistingPeriodicWorkPolicy.KEEP,
             newsWork
         )
 
@@ -88,18 +88,11 @@ object SyncManager {
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
             LINE_UPDATE_CHECK_WORK,
-            ExistingPeriodicWorkPolicy.REPLACE,
+            ExistingPeriodicWorkPolicy.KEEP,
             lineUpdateWork
         )
 
         Log.d(TAG, "Hat güncellemeleri kontrolü planlandı (her 15 dakika)")
     }
 
-    /**
-     * Periyodik senkronizasyonu iptal eder.
-     */
-    fun cancelPeriodicSync(context: Context) {
-        WorkManager.getInstance(context).cancelUniqueWork(PERIODIC_SYNC_WORK)
-        Log.d(TAG, "Periyodik senkronizasyon iptal edildi")
-    }
 }

@@ -37,7 +37,7 @@ fun SplashScreen(
     onNavigateToHome: () -> Unit
 ) {
     val context = LocalContext.current
-    val isDarkTheme by com.berat.sakus.theme.ThemeManager.getInstance(context).isDarkTheme.collectAsState()
+    val isDarkTheme by com.berat.sakus.ui.theme.ThemeManager.getInstance(context).isDarkTheme.collectAsState()
     val logoResId = if (isDarkTheme) {
         R.drawable.ic_logo_dark
     } else {
@@ -71,15 +71,8 @@ fun SplashScreen(
         // Hat değişiklikleri kontrolünü planla
         SyncManager.scheduleLineUpdateCheck(context)
 
-        onNavigateToHome()
-    }
 
-    // Arka planda güncelleme başlat (fire and forget, WorkManager devralacak)
-    LaunchedEffect(key1 = "background_sync") {
-        val repository = TransportRepository.getInstance(context)
-        if (repository.hasHatlar()) {
-            try { repository.periodicSync() } catch (_: Exception) {}
-        }
+        onNavigateToHome()
     }
 
     Box(

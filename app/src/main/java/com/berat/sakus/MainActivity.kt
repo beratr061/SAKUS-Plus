@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.collectAsState
-import com.berat.sakus.theme.ThemeManager
+import com.berat.sakus.ui.theme.ThemeManager
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,8 +32,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
-import com.berat.sakus.ui.screens.SakusHomeScreen
-import com.berat.sakus.ui.screens.SplashScreen
 import com.berat.sakus.ui.theme.SAKUSTheme
 
 class MainActivity : ComponentActivity() {
@@ -60,6 +58,7 @@ class MainActivity : ComponentActivity() {
 fun MyApp() {
     val navController = rememberNavController()
     val context = LocalContext.current
+    val gson = remember { Gson() }
     val launchRoute = remember {
         (context as? ComponentActivity)?.intent?.getStringExtra("navigate_to") ?: "home"
     }
@@ -105,7 +104,7 @@ fun MyApp() {
             TransportationScreen(
                 onNavigateBack = { navController.popBackStack() },
                 onNavigateRouteMap = { hat ->
-                    val hatJson = Gson().toJson(hat)
+                    val hatJson = gson.toJson(hat)
                     val encodedJson = URLEncoder.encode(hatJson, "UTF-8")
                     navController.navigate("map/$encodedJson")
                 }
@@ -116,7 +115,7 @@ fun MyApp() {
                 onNavigateBack = { navController.popBackStack() },
                 onNavigateRouteMap = { },
                 onNavigateToSchedule = { hat ->
-                    val hatJson = Gson().toJson(hat)
+                    val hatJson = gson.toJson(hat)
                     val encodedJson = URLEncoder.encode(hatJson, "UTF-8")
                     navController.navigate("hat_sefer_saatleri/$encodedJson")
                 }
@@ -129,7 +128,7 @@ fun MyApp() {
             val hatJsonEncoded = backStackEntry.arguments?.getString("hatJson")
             if (hatJsonEncoded != null) {
                 val hatJson = URLDecoder.decode(hatJsonEncoded, "UTF-8")
-                val hat = Gson().fromJson(hatJson, HatBilgisi::class.java)
+                val hat = gson.fromJson(hatJson, HatBilgisi::class.java)
                 HatSeferSaatleriScreen(
                     hat = hat,
                     onNavigateBack = { navController.popBackStack() }
@@ -143,17 +142,17 @@ fun MyApp() {
             val hatJsonEncoded = backStackEntry.arguments?.getString("hatJson")
             if (hatJsonEncoded != null) {
                 val hatJson = URLDecoder.decode(hatJsonEncoded, "UTF-8")
-                val hat = Gson().fromJson(hatJson, HatBilgisi::class.java)
+                val hat = gson.fromJson(hatJson, HatBilgisi::class.java)
                 LineMapScreen(
                     hat = hat,
                     onNavigateBack = { navController.popBackStack() },
                     onNavigateDuyuruDetail = { duyuru ->
-                        val duyuruJson = Gson().toJson(duyuru)
+                        val duyuruJson = gson.toJson(duyuru)
                         val encodedJson = URLEncoder.encode(duyuruJson, "UTF-8")
                         navController.navigate("duyuru_detay/$encodedJson")
                     },
                     onNavigateSeferSaatleri = { selectedHat ->
-                        val hatJsonForSchedule = Gson().toJson(selectedHat)
+                        val hatJsonForSchedule = gson.toJson(selectedHat)
                         val encodedHatJson = URLEncoder.encode(hatJsonForSchedule, "UTF-8")
                         navController.navigate("hat_sefer_saatleri/$encodedHatJson")
                     }
@@ -164,7 +163,7 @@ fun MyApp() {
             NewsScreen(
                 onNavigateBack = { navController.popBackStack() },
                 onNavigateToDetail = { haber ->
-                    val haberJson = Gson().toJson(haber)
+                    val haberJson = gson.toJson(haber)
                     val encodedJson = URLEncoder.encode(haberJson, "UTF-8")
                     navController.navigate("haber_detay/$encodedJson")
                 }
@@ -177,7 +176,7 @@ fun MyApp() {
             val haberJsonEncoded = backStackEntry.arguments?.getString("haberJson")
             if (haberJsonEncoded != null) {
                 val haberJson = URLDecoder.decode(haberJsonEncoded, "UTF-8")
-                val haber = Gson().fromJson(haberJson, NewsItem::class.java)
+                val haber = gson.fromJson(haberJson, NewsItem::class.java)
                 NewsDetailScreen(
                     haber = haber,
                     onNavigateBack = { navController.popBackStack() }
@@ -188,7 +187,7 @@ fun MyApp() {
             DuyurularScreen(
                 onNavigateBack = { navController.popBackStack() },
                 onNavigateToDetail = { duyuru ->
-                    val duyuruJson = Gson().toJson(duyuru)
+                    val duyuruJson = gson.toJson(duyuru)
                     val encodedJson = URLEncoder.encode(duyuruJson, "UTF-8")
                     navController.navigate("duyuru_detay/$encodedJson")
                 }
@@ -201,7 +200,7 @@ fun MyApp() {
             val duyuruJsonEncoded = backStackEntry.arguments?.getString("duyuruJson")
             if (duyuruJsonEncoded != null) {
                 val duyuruJson = URLDecoder.decode(duyuruJsonEncoded, "UTF-8")
-                val duyuru = Gson().fromJson(duyuruJson, Duyuru::class.java)
+                val duyuru = gson.fromJson(duyuruJson, Duyuru::class.java)
                 DuyuruDetailScreen(
                     duyuru = duyuru,
                     onNavigateBack = { navController.popBackStack() }
@@ -212,7 +211,7 @@ fun MyApp() {
             DuraklarScreen(
                 onNavigateBack = { navController.popBackStack() },
                 onNavigateToDetail = { durak ->
-                    val durakJson = Gson().toJson(durak)
+                    val durakJson = gson.toJson(durak)
                     val encodedJson = URLEncoder.encode(durakJson, "UTF-8")
                     navController.navigate("durak_detay/$encodedJson")
                 }
@@ -225,7 +224,7 @@ fun MyApp() {
             val durakJsonEncoded = backStackEntry.arguments?.getString("durakJson")
             if (durakJsonEncoded != null) {
                 val durakJson = URLDecoder.decode(durakJsonEncoded, "UTF-8")
-                val durak = Gson().fromJson(durakJson, DurakBilgisi::class.java)
+                val durak = gson.fromJson(durakJson, DurakBilgisi::class.java)
                 DurakDetailScreen(
                     durak = durak,
                     onNavigateBack = { navController.popBackStack() }
@@ -252,18 +251,23 @@ fun MyApp() {
                 onNavigateBack = { navController.popBackStack() }
             )
         }
-        // Placeholders for non-converted screens
         composable("iletisim") {
-            // Placeholder: Not implemented yet
-            SakusHomeScreen(onNavigate = { navController.navigate(it) })
+            ComingSoonScreen(
+                title = "İletişim ve Geri Bildirim",
+                onNavigateBack = { navController.popBackStack() }
+            )
         }
         composable("favoriler") {
-            // Placeholder: Not implemented yet
-            SakusHomeScreen(onNavigate = { navController.navigate(it) })
+            ComingSoonScreen(
+                title = "Favoriler",
+                onNavigateBack = { navController.popBackStack() }
+            )
         }
         composable("profil") {
-            // Placeholder: Not implemented yet
-            SakusHomeScreen(onNavigate = { navController.navigate(it) })
+            ComingSoonScreen(
+                title = "Profil",
+                onNavigateBack = { navController.popBackStack() }
+            )
         }
     }
     }

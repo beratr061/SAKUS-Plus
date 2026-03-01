@@ -13,7 +13,4 @@ interface AppNotificationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNotification(notification: AppNotificationEntity)
-    
-    @Query("DELETE FROM app_notifications")
-    suspend fun clearAllNotifications()
 }

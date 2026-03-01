@@ -58,7 +58,7 @@ fun DuyuruDetailScreen(
     val formattedStartDate = if (duyuru.baslangicTarih.isNotEmpty()) {
         try {
             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("dd MMMM yyyy, EEEE", Locale("tr"))
+            val outputFormat = SimpleDateFormat("dd MMMM yyyy, EEEE", Locale.forLanguageTag("tr"))
             val date = inputFormat.parse(duyuru.baslangicTarih)
             date?.let { outputFormat.format(it) } ?: duyuru.baslangicTarih
         } catch (_: Exception) {
