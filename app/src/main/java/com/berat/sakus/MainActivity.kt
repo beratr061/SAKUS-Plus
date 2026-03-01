@@ -231,6 +231,11 @@ fun MyApp() {
                 )
             }
         }
+        composable("arac_sorgu") {
+            AracSorguScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
         composable("kayip_esya") {
             LostPropertyScreen(
                 onNavigateBack = { navController.popBackStack() }

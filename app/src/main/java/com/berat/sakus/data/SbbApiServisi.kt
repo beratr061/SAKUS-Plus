@@ -440,7 +440,137 @@ class SbbApiServisi private constructor(private val context: Context) {
         }
     }.flowOn(Dispatchers.IO)
 
-    // 8. Durağa yaklaşan otobüsler (canlı araç verisinden)
+    // 8. Araç Sorgulama (plaka veya kapı numarası ile)
+    
+    /**
+     * SSE stream üzerinden araç sorgulama.
+     * Plaka veya kapı numarasına göre arama yapar.
+     * Her stream güncellemesinde eşleşen araçları emit eder.
+     */
+    fun aracSorgula(sorgu: String): Flow<List<AracKonumu>> = flow {
+        val normalizedQuery = sorgu.trim().uppercase().replace("\\s+".toRegex(), " ")
+        
+        while (currentCoroutineContext().isActive) {
+            var reader: BufferedReader? = null
+            try {
+                val request = Request.Builder()
+                    .url(STREAM_URL)
+                    .header("Origin", "https://ulasim.sakarya.bel.tr")
+                    .header("Referer", "https://ulasim.sakarya.bel.tr")
+                    .header("User-Agent", "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36")
+                    .header("Accept", "text/event-stream")
+                    .build()
+
+                val response = streamClient.newCall(request).execute()
+                if (!response.isSuccessful) {
+                    Log.e(TAG, "SSE sorgu bağlantı hatası: ${response.code}")
+                    response.close()
+                    delay(2000)
+                    continue
+                }
+
+                reader = response.body?.byteStream()?.bufferedReader()
+                if (reader == null) {
+                    response.close()
+                    delay(2000)
+                    continue
+                }
+
+                Log.d(TAG, "SSE araç sorgu stream bağlantısı kuruldu (sorgu=$sorgu)")
+
+                var line: String?
+                var currentEventType = ""
+                while (currentCoroutineContext().isActive) {
+                    line = reader.readLine()
+                    if (line == null) {
+                        Log.w(TAG, "SSE sorgu stream kapandı, yeniden bağlanılıyor...")
+                        break
+                    }
+
+                    if (line.startsWith("event:")) {
+                        currentEventType = line.removePrefix("event:").trim()
+                        continue
+                    }
+
+                    if (line.startsWith("data:")) {
+                        val jsonStr = line.removePrefix("data:").trim()
+                        if (jsonStr.isEmpty()) continue
+
+                        if (currentEventType == "server-disconnect") {
+                            Log.w(TAG, "SSE sorgu sunucu bağlantıyı kesti — yeniden bağlanılıyor...")
+                            currentEventType = ""
+                            break
+                        }
+
+                        currentEventType = ""
+                        try {
+                            val parsed = JsonParser.parseString(jsonStr)
+                            if (parsed.isJsonArray) {
+                                val allVehicles = parsed.asJsonArray
+                                    .filter { it.isJsonObject }
+                                    .map { it.asJsonObject }
+
+                                val filtered = allVehicles.filter { obj ->
+                                    val plate = if (obj.has("plate") && !obj.get("plate").isJsonNull)
+                                        obj.get("plate").asString.trim().uppercase().replace("\\s+".toRegex(), " ") else ""
+                                    val busNum = if (obj.has("busNumber") && !obj.get("busNumber").isJsonNull)
+                                        obj.get("busNumber").asString.trim() else ""
+                                    
+                                    plate.contains(normalizedQuery) || 
+                                    normalizedQuery.contains(plate.filter { it != ' ' }) && plate.isNotEmpty() ||
+                                    busNum == normalizedQuery ||
+                                    busNum.contains(normalizedQuery)
+                                }.mapNotNull { AracKonumu.fromJson(it) }
+
+                                if (filtered.isNotEmpty()) {
+                                    emit(filtered)
+                                }
+                            }
+                        } catch (e: Exception) {
+                            Log.e(TAG, "SSE sorgu veri ayrıştırma hatası: ${e.message}")
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (currentCoroutineContext().isActive) {
+                    Log.e(TAG, "SSE sorgu stream hatası: ${e.message}")
+                    delay(2000)
+                }
+            } finally {
+                try { reader?.close() } catch (_: Exception) {}
+            }
+        }
+    }.flowOn(Dispatchers.IO)
+
+    /**
+     * REST API ile araç sorgulama (fallback).
+     * Tüm hatların araçlarını tarar, plaka veya kapı numarasına göre filtreler.
+     */
+    suspend fun aracSorgulaRest(sorgu: String): List<AracKonumu> = withContext(Dispatchers.IO) {
+        val normalizedQuery = sorgu.trim().uppercase().replace("\\s+".toRegex(), " ")
+        val map = loadAsisMap()
+        val sonuclar = mutableListOf<AracKonumu>()
+        
+        for ((key, _) in map.entrySet()) {
+            val asisId = key.toIntOrNull() ?: continue
+            val araclar = aracKonumlariniGetir(asisId)
+            for (arac in araclar) {
+                val plakaUpper = arac.plaka.trim().uppercase().replace("\\s+".toRegex(), " ")
+                val busNumStr = arac.aracNumarasi.toString()
+                if (plakaUpper.contains(normalizedQuery) ||
+                    normalizedQuery.contains(plakaUpper.filter { it != ' ' }) && plakaUpper.isNotEmpty() ||
+                    busNumStr == normalizedQuery ||
+                    busNumStr.contains(normalizedQuery)
+                ) {
+                    sonuclar.add(arac)
+                }
+            }
+            if (sonuclar.isNotEmpty()) break // Bulundu, diğer hatları tarama
+        }
+        sonuclar
+    }
+
+    // 9. Durağa yaklaşan otobüsler (canlı araç verisinden)
     suspend fun durakYaklasanAraclariGetir(durak: DurakBilgisi, hatlar: List<HatBilgisi>): List<DurakVarisi> =
         withContext(Dispatchers.IO) {
             val sonuclar = mutableListOf<DurakVarisi>()

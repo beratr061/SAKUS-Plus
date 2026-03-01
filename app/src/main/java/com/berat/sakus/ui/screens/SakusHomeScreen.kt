@@ -426,6 +426,13 @@ private fun DrawerContent(onCloseDrawer: () -> Unit, onNavigate: (String) -> Uni
             }
             item { 
                 DrawerItem(
+                    icon = { Icon(Icons.Default.Search, contentDescription = null, tint = androidx.compose.ui.graphics.Color.White, modifier = Modifier.size(24.dp)) }, 
+                    title = "Araç Sorgula", 
+                    onClick = { onCloseDrawer(); onNavigate("arac_sorgu") }
+                ) 
+            }
+            item { 
+                DrawerItem(
                     icon = { Icon(Icons.Default.Email, contentDescription = null, tint = androidx.compose.ui.graphics.Color.White, modifier = Modifier.size(24.dp)) }, 
                     title = "İletişim ve Geri Bildirim", 
                     onClick = { onCloseDrawer(); onNavigate("iletisim") }

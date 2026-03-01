@@ -24,6 +24,19 @@ data class AracKonumu(
 ) {
     val hizFormati: String get() = "$hiz km/h"
 
+    val durumTr: String get() = when (durum.uppercase()) {
+        "AT_STOP" -> "Durakta"
+        "IN_TRAFFIC" -> "Trafikte"
+        "MOVING", "IN_MOTION" -> "Hareket Halinde"
+        "OUT_OF_SERVICE" -> "Hizmet Dışı"
+        "IDLE" -> "Beklemede"
+        "STOPPED" -> "Durdu"
+        "NOT_REPORTING" -> "Sinyal Yok"
+        else -> durum.replace("_", " ")
+            .lowercase()
+            .replaceFirstChar { it.uppercase() }
+    }
+
     val aktifMi: Boolean
         get() = durum.uppercase() != "OUT_OF_SERVICE" && durum.uppercase() != "IDLE" && lat != 0.0 && lng != 0.0
 
