@@ -3,7 +3,6 @@ package com.berat.sakus.ui.screens
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.berat.sakus.data.HatBilgisi
 import com.berat.sakus.data.HatSeferBilgisi
 import com.berat.sakus.data.SeferDetay
 import com.berat.sakus.data.repository.TransportRepository

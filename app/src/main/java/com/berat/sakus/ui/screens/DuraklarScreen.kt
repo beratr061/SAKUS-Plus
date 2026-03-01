@@ -19,7 +19,6 @@ import androidx.compose.material.icons.filled.MyLocation
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
@@ -42,7 +41,6 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.*
 import com.google.maps.android.compose.clustering.Clustering
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
 private val SAKARYA_CENTER = LatLng(40.7750, 30.3950)

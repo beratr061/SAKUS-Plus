@@ -1,6 +1,5 @@
 package com.berat.sakus.data.sync
 
-import com.berat.sakus.data.GuzergahSefer
 import com.berat.sakus.data.HatSeferBilgisi
 
 object DiffHelper {

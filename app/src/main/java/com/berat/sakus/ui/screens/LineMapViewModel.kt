@@ -23,7 +23,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import java.util.Calendar
 
 class LineMapViewModel(application: Application) : AndroidViewModel(application) {
     private val sbbApiServisi = SbbApiServisi.getInstance(application)

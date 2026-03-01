@@ -22,7 +22,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.berat.sakus.data.HatBilgisi
-import com.berat.sakus.ui.screens.groupTimesByHour
 
 // Figma design specs (430px width, from HTML export)
 private val ColorMainBg = Color(0xFF303030)

@@ -22,9 +22,8 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
-
 import android.annotation.SuppressLint
-import com.berat.sakus.data.models.*
+
 @SuppressLint("StaticFieldLeak")
 class SbbApiServisi private constructor(private val context: Context) {
 

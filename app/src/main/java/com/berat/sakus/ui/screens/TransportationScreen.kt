@@ -2,7 +2,6 @@ package com.berat.sakus.ui.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -21,7 +20,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalConfiguration
@@ -36,16 +34,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.runtime.Stable
 import com.berat.sakus.R
 import com.berat.sakus.data.HatBilgisi
-import com.berat.sakus.data.SbbApiServisi
 import com.berat.sakus.data.repository.TransportRepository
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.sample
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.delay
-import androidx.compose.runtime.snapshotFlow
 
 enum class TransportType { BUS, TRAM, METROBUS, ADARAY, MINIBUS, DOLMUS, OTHER }
 
