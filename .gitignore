@@ -22,6 +22,7 @@ local.properties
 # Keystore files (sensitive)
 *.jks
 *.keystore
+keystore_base64.txt
 sakus_plus
 
 # Release APK (large binary)
