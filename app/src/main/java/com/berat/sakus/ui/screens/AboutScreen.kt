@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -25,11 +24,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 import com.berat.sakus.R
 import com.berat.sakus.ui.theme.ThemeManager
 import java.util.Calendar
+import com.berat.sakus.ui.theme.PrimaryPurple
 
 @Composable
 private fun s(value: Float): Dp {
@@ -119,10 +118,10 @@ fun AboutScreen(
                             .background(cardColor, CircleShape)
                             .padding(30.dp)
                     ) {
-                        val logoResId = if (isDarkTheme) R.drawable.ic_logo_dark else R.drawable.ic_logo_light
-                        Image(
-                            painter = painterResource(logoResId),
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_bus),
                             contentDescription = "Logo",
+                            tint = if (isDarkTheme) Color.White else PrimaryPurple,
                             modifier = Modifier.size(80.dp).align(Alignment.Center)
                         )
                     }
@@ -131,7 +130,7 @@ fun AboutScreen(
                 Spacer(modifier = Modifier.height(40.dp))
 
                 Text(
-                    text = "Sakus Mobil",
+                    text = "Otobüs Takip",
                     color = textColor,
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
@@ -157,7 +156,7 @@ fun AboutScreen(
                 Spacer(modifier = Modifier.height(40.dp))
 
                 Text(
-                    text = "Sakarya Ulaşım Mobil Uygulaması ile şehir içi yolculuklarınız artık daha kolay ve planlı.",
+                    text = "Otobüs Takip Uygulaması ile şehir içi yolculuklarınız artık daha kolay ve planlı.",
                     textAlign = TextAlign.Center,
                     color = if (isDarkTheme) Color.White.copy(alpha = 0.7f) else textColor.copy(alpha = 0.7f),
                     fontSize = 16.sp,
@@ -166,15 +165,13 @@ fun AboutScreen(
 
                 Spacer(modifier = Modifier.height(60.dp))
 
-                InfoRow(icon = Icons.Outlined.Language, text = "www.sakarya.bel.tr")
-                Spacer(modifier = Modifier.height(16.dp))
-                InfoRow(icon = Icons.Outlined.Email, text = "iletisim@sakarya.bel.tr")
+                InfoRow(icon = Icons.Outlined.Email, text = "byayla82@gmail.com")
 
                 Spacer(modifier = Modifier.weight(1f))
 
                 val year = Calendar.getInstance().get(Calendar.YEAR)
                 Text(
-                    text = "© $year Sakarya Büyükşehir Belediyesi",
+                    text = "© $year Berat Yayla",
                     color = if (isDarkTheme) Color.White.copy(alpha = 0.38f) else Color.Black.copy(alpha = 0.38f),
                     fontSize = 12.sp
                 )

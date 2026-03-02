@@ -29,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import com.berat.sakus.R
 import com.berat.sakus.data.repository.TransportRepository
 import com.berat.sakus.data.sync.SyncManager
+import com.berat.sakus.ui.theme.PrimaryPurple
 import kotlinx.coroutines.delay
 
 @Composable
@@ -37,11 +38,6 @@ fun SplashScreen(
 ) {
     val context = LocalContext.current
     val isDarkTheme by com.berat.sakus.ui.theme.ThemeManager.getInstance(context).isDarkTheme.collectAsState()
-    val logoResId = if (isDarkTheme) {
-        R.drawable.ic_logo_dark
-    } else {
-        R.drawable.ic_logo_light
-    }
 
     var statusMessage by remember { mutableStateOf("") }
     var isSyncing by remember { mutableStateOf(false) }
@@ -84,9 +80,9 @@ fun SplashScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
-                painter = painterResource(id = logoResId),
+                painter = painterResource(id = R.drawable.ic_bus),
                 contentDescription = "App Logo",
-                tint = Color.Unspecified,
+                tint = if (isDarkTheme) Color.White else PrimaryPurple,
                 modifier = Modifier.size(190.dp)
             )
 

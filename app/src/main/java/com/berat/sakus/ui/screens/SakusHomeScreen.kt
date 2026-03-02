@@ -143,28 +143,26 @@ private fun TopBar(onOpenDrawer: () -> Unit, onNavigate: (String) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
-            .background(MaterialTheme.colorScheme.surface)
+            .background(PrimaryPurple)
             .padding(horizontal = 24.dp)
     ) {
-        HorizontalDivider(
-            modifier = Modifier.align(Alignment.BottomCenter),
-            color = MaterialTheme.colorScheme.outlineVariant,
-            thickness = 1.dp
-        )
+        // Optional: Remove divider if top bar is colored
+        // HorizontalDivider(...)
         
         IconButton(
             onClick = onOpenDrawer,
             modifier = Modifier.align(Alignment.CenterStart)
         ) {
-            Icon(Icons.Filled.Menu, contentDescription = "Menu", modifier = Modifier.size(30.dp))
+            Icon(Icons.Filled.Menu, contentDescription = "Menu", modifier = Modifier.size(30.dp), tint = Color.White)
         }
 
-        Image(
-            painter = painterResource(id = if (isDarkTheme) R.drawable.ic_logo_dark else R.drawable.ic_logo_light),
+        Icon(
+            painter = painterResource(id = R.drawable.ic_bus),
             contentDescription = "Logo",
+            tint = Color.White,
             modifier = Modifier
                 .align(Alignment.Center)
-                .height(52.dp)
+                .height(36.dp)
         )
 
         Row(
@@ -174,7 +172,7 @@ private fun TopBar(onOpenDrawer: () -> Unit, onNavigate: (String) -> Unit) {
                 Icon(
                     painter = painterResource(R.drawable.ic_notification_bell),
                     contentDescription = "Duyurular",
-                    tint = LocalContentColor.current,
+                    tint = Color.White,
                     modifier = Modifier.size(26.dp)
                 )
             }
@@ -400,19 +398,27 @@ private fun DrawerContent(onCloseDrawer: () -> Unit, onNavigate: (String) -> Uni
             .fillMaxSize()
             .background(bgColor)
     ) {
-        // Header - logo centered
-        Box(
+        // Header - text and bus icon
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp),
-            contentAlignment = Alignment.Center
+                .height(180.dp)
+                .padding(horizontal = 24.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
-            Image(
-                painter = painterResource(R.drawable.ic_sbbyatay),
-                contentDescription = "SBB Logo",
-                modifier = Modifier
-                    .fillMaxWidth(0.7f)
-                    .padding(horizontal = 24.dp)
+            Text(
+                text = "OTOBÜS TAKİP",
+                color = Color.White,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Icon(
+                painter = painterResource(id = R.drawable.ic_bus),
+                contentDescription = "Bus Icon",
+                tint = Color.White,
+                modifier = Modifier.size(36.dp)
             )
         }
 

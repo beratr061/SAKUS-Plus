@@ -53,7 +53,7 @@ SAKUS Plus, Sakarya Büyükşehir Belediyesi'nin sunduğu public API'leri kullan
 Uygulama **REST API** ve **SSE (Server-Sent Events)** protokolü olmak üzere iki farklı veri iletişim modeli kullanır. REST API'ler durak, hat, duyuru ve haber gibi statik veriler için kullanılırken; SSE stream'i canlı araç konum takibi için saniyede bir güncelleme sağlar.
 
 > **Not:** Bu proje eğitim ve topluma hizmet amacı ile geliştirilmiştir. Sakarya Büyükşehir Belediyesi'nin resmi uygulaması değildir.
-
+> **Güncelleme:** Büyükşehir Belediyesine ait logolar, olası telif hakkı ihlali kapsamında uygulamadan kaldırılmıştır. Çözüm Masasına iletilen görsellerin, uygulamanın eski versiyonlarına ait olması nedeniyle söz konusu logolar yer almaktadır.
 ---
 
 ## ✨ Özellikler
