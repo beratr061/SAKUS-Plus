@@ -200,9 +200,18 @@ fun DuyuruDetailScreen(
                     },
                     update = { view ->
                         view.setTextColor(androidColor)
+                        // API bazen double-encoded HTML döndürüyor (&lt;p&gt; gibi)
+                        val rawHtml = duyuru.icerik ?: ""
+                        val decodedHtml = rawHtml
+                            .replace("&lt;", "<")
+                            .replace("&gt;", ">")
+                            .replace("&amp;", "&")
+                            .replace("&quot;", "\"")
+                            .replace("&#39;", "'")
+                            .replace("&nbsp;", "\u00A0")
                         view.text = HtmlCompat.fromHtml(
-                            duyuru.icerik ?: "",
-                            HtmlCompat.FROM_HTML_MODE_COMPACT
+                            decodedHtml,
+                            HtmlCompat.FROM_HTML_MODE_LEGACY
                         )
                     }
                 )

@@ -15,6 +15,11 @@ class SAKUSApplication : Application(), SingletonImageLoader.Factory {
         super.onCreate()
         NewsNotificationHelper.ensureChannel(this)
         com.berat.sakus.data.notification.LineUpdateNotificationHelper.ensureChannel(this)
+
+        // Periyodik arka plan görevlerini planla
+        com.berat.sakus.data.sync.SyncManager.schedulePeriodicSync(this)
+        com.berat.sakus.data.sync.SyncManager.scheduleNewsCheck(this)
+        com.berat.sakus.data.sync.SyncManager.scheduleLineUpdateCheck(this)
     }
 
     override fun newImageLoader(context: PlatformContext): ImageLoader {

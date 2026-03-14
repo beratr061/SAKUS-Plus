@@ -34,11 +34,20 @@ class SbbApiServisi private constructor(private val context: Context) {
         private const val TAG = "SbbApiServisi"
 
         const val BUS_TYPE_BELEDIYE = 3869
-        const val BUS_TYPE_OZEL_HALK = 5731
+        const val BUS_TYPE_OZEL_HALK = 7355
         const val BUS_TYPE_TAKSI_DOLMUS = 5733
         const val BUS_TYPE_MINIBUS = 5732
         const val BUS_TYPE_METROBUS = 6904
         const val BUS_TYPE_ADARAY = 6905
+        const val BUS_TYPE_TRAMVAY = 7416
+        const val BUS_TYPE_BELEDIYE_ESKI = 6907
+        const val BUS_TYPE_EUTS_OZEL_HALK = 7354
+
+        // Bu busType'lardan gelen veriler yansıtılmaz (filtrelenir)
+        private val HIDDEN_BUS_TYPES = setOf(7354, 5731)
+
+        // BusType listesinde görünmeyen, sadece lineId ile erişilebilen hatlar
+        private val GIZLI_HAT_IDS = listOf(96, 294, 295, 296, 299)
 
         @Volatile
         private var instance: SbbApiServisi? = null
@@ -125,13 +134,21 @@ class SbbApiServisi private constructor(private val context: Context) {
         val deferredMinibus = async { hatlariGetir(BUS_TYPE_MINIBUS) }
         val deferredMetrobus = async { hatlariGetir(BUS_TYPE_METROBUS) }
         val deferredAdaray = async { hatlariGetir(BUS_TYPE_ADARAY) }
+        val deferredTramvay = async { hatlariGetir(BUS_TYPE_TRAMVAY) }
+        val deferredEutsOzelHalk = async { hatlariGetir(BUS_TYPE_EUTS_OZEL_HALK) }
         
-        val results = awaitAll(deferredBelediye, deferredOzelHalk, deferredTaksiDolmus, deferredMinibus, deferredMetrobus, deferredAdaray)
+        val results = awaitAll(deferredBelediye, deferredOzelHalk, deferredTaksiDolmus, deferredMinibus, deferredMetrobus, deferredAdaray, deferredTramvay, deferredEutsOzelHalk)
         for (list in results) {
             tumHatlar.addAll(list)
         }
 
-        val uniqueHatlar = tumHatlar.distinctBy { it.id }.toMutableList()
+        // Gizli busType'lardan gelen hatları filtrele
+        val filteredHatlar = tumHatlar.filter { it.aracTipId !in HIDDEN_BUS_TYPES }.toMutableList()
+
+        // BusType listesinde görünmeyen gizli hatları ekle
+        filteredHatlar.addAll(gizliHatlariGetir())
+
+        val uniqueHatlar = filteredHatlar.distinctBy { it.id }.toMutableList()
 
         uniqueHatlar.sortWith { a, b ->
             val numRegex = Regex("[^0-9]")
@@ -156,6 +173,37 @@ class SbbApiServisi private constructor(private val context: Context) {
             items = details.getAsJsonArray("items") ?: details.getAsJsonArray("Items")
         }
         return items?.mapNotNull { if (it.isJsonObject) HatBilgisi.fromJson(it.asJsonObject) else null } ?: emptyList()
+    }
+
+    /**
+     * BusType listesinde görünmeyen gizli hatları lineId üzerinden çeker.
+     * /Ulasim/route-and-busstops/{lineId} endpoint'inden hat bilgisini parse eder.
+     */
+    private suspend fun gizliHatlariGetir(): List<HatBilgisi> = withContext(Dispatchers.IO) {
+        GIZLI_HAT_IDS.mapNotNull { lineId ->
+            async {
+                try {
+                    val data = get("$BASE_URL/Ulasim/route-and-busstops/$lineId")
+                    if (data != null && data.isJsonObject) {
+                        val obj = data.asJsonObject
+                        HatBilgisi(
+                            id = if (obj.has("lineId") && !obj.get("lineId").isJsonNull) obj.get("lineId").asInt else lineId,
+                            ad = if (obj.has("lineName") && !obj.get("lineName").isJsonNull) obj.get("lineName").asString else "",
+                            hatNumarasi = if (obj.has("lineNumber") && !obj.get("lineNumber").isJsonNull) obj.get("lineNumber").asString else "",
+                            aracTipAdi = "",
+                            aracTipAciklama = "",
+                            aracTipRenk = "#68bd9c",
+                            aracTipId = if (obj.has("typeValueId") && !obj.get("typeValueId").isJsonNull) obj.get("typeValueId").asInt else 0,
+                            asisId = if (obj.has("ekentLineIntegrationId") && !obj.get("ekentLineIntegrationId").isJsonNull) obj.get("ekentLineIntegrationId").asInt else null,
+                            slug = ""
+                        )
+                    } else null
+                } catch (e: Exception) {
+                    Log.e(TAG, "Gizli hat çekme hatası (lineId=$lineId): ${e.message}")
+                    null
+                }
+            }
+        }.awaitAll().filterNotNull()
     }
 
     // 2. Hat Sefer Saatleri

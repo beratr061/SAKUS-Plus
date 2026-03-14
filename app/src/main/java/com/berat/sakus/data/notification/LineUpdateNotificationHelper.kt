@@ -56,6 +56,6 @@ object LineUpdateNotificationHelper {
             .build()
 
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        nm.notify(NOTIFICATION_ID_BASE + notificationId, notification)
+        nm.notify(notificationId, notification)
     }
 }

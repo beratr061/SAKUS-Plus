@@ -19,6 +19,11 @@ data class HatBilgisi(
         get() {
             if (aracTipId == SbbApiServisi.BUS_TYPE_METROBUS) return "metrobus"
             if (aracTipId == SbbApiServisi.BUS_TYPE_ADARAY) return "adaray"
+            if (aracTipId == SbbApiServisi.BUS_TYPE_TRAMVAY) return "tramvay"
+            if (aracTipId == SbbApiServisi.BUS_TYPE_OZEL_HALK) return "ozel_halk"
+            if (aracTipId == SbbApiServisi.BUS_TYPE_BELEDIYE) return "belediye"
+            if (aracTipId == SbbApiServisi.BUS_TYPE_BELEDIYE_ESKI) return "belediye"
+            if (aracTipId == SbbApiServisi.BUS_TYPE_EUTS_OZEL_HALK) return "ozel_halk"
             val desc = aracTipAciklama.uppercase()
             if (desc.contains("METROBÜS") || desc.contains("METROBUS")) return "metrobus"
             if (desc.contains("BELEDİYE")) return "belediye"

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 /**
  * WorkManager periyodik senkronizasyonu yönetir.
- * Her saat başı API'den güncel verileri kontrol eder.
+ * Arka planda çalışarak uygulama kapalıyken bile kontrol yapar.
  */
 object SyncManager {
 
@@ -20,79 +20,58 @@ object SyncManager {
     private const val NEWS_CHECK_WORK = "news_check_periodic"
     private const val LINE_UPDATE_CHECK_WORK = "line_update_check_periodic"
 
-    /**
-     * Saatlik periyodik senkronizasyonu başlatır.
-     * Uygulama ilk açıldığında çağrılmalıdır.
-     */
-    fun schedulePeriodicSync(context: Context) {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
+    private val networkConstraints = Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.CONNECTED)
+        .build()
 
-        val periodicWork = PeriodicWorkRequestBuilder<DataSyncWorker>(
-            15, TimeUnit.MINUTES
+    fun schedulePeriodicSync(context: Context) {
+        val work = PeriodicWorkRequestBuilder<DataSyncWorker>(
+            30, TimeUnit.MINUTES
         )
-            .setConstraints(constraints)
+            .setConstraints(networkConstraints)
+            .setInitialDelay(2, TimeUnit.MINUTES)
             .addTag(PERIODIC_SYNC_WORK)
             .build()
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
             PERIODIC_SYNC_WORK,
             ExistingPeriodicWorkPolicy.KEEP,
-            periodicWork
+            work
         )
-
-        Log.d(TAG, "Periyodik senkronizasyon planlandı (her 15 dakika)")
+        Log.d(TAG, "Periyodik senkronizasyon planlandı (her 30 dakika)")
     }
 
-    /**
-     * Periyodik haber kontrolünü başlatır.
-     * Yeni haber geldiğinde bildirim gösterir.
-     */
     fun scheduleNewsCheck(context: Context) {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val newsWork = PeriodicWorkRequestBuilder<NewsCheckWorker>(
-            15, TimeUnit.MINUTES
+        val work = PeriodicWorkRequestBuilder<NewsCheckWorker>(
+            30, TimeUnit.MINUTES
         )
-            .setConstraints(constraints)
+            .setConstraints(networkConstraints)
+            .setInitialDelay(1, TimeUnit.MINUTES)
             .addTag(NEWS_CHECK_WORK)
             .build()
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
             NEWS_CHECK_WORK,
             ExistingPeriodicWorkPolicy.KEEP,
-            newsWork
+            work
         )
-
-        Log.d(TAG, "Haber kontrolü planlandı (her 15 dakika)")
+        Log.d(TAG, "Haber kontrolü planlandı (her 30 dakika)")
     }
 
-    /**
-     * Periyodik ulaşım değişiklikleri kontrolünü başlatır.
-     * Hat güncellemelerinde bildirim gösterir.
-     */
     fun scheduleLineUpdateCheck(context: Context) {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val lineUpdateWork = PeriodicWorkRequestBuilder<LineUpdateWorker>(
-            15, TimeUnit.MINUTES
+        val work = PeriodicWorkRequestBuilder<LineUpdateWorker>(
+            60, TimeUnit.MINUTES
         )
-            .setConstraints(constraints)
+            .setConstraints(networkConstraints)
+            .setInitialDelay(5, TimeUnit.MINUTES)
             .addTag(LINE_UPDATE_CHECK_WORK)
             .build()
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
             LINE_UPDATE_CHECK_WORK,
             ExistingPeriodicWorkPolicy.KEEP,
-            lineUpdateWork
+            work
         )
-
-        Log.d(TAG, "Hat güncellemeleri kontrolü planlandı (her 15 dakika)")
+        Log.d(TAG, "Hat güncellemeleri kontrolü planlandı (her 60 dakika)")
     }
-
 }

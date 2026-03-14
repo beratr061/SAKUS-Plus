@@ -56,6 +56,6 @@ object NewsNotificationHelper {
             .build()
 
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        nm.notify(NOTIFICATION_ID_BASE + newsId, notification)
+        nm.notify(newsId, notification)
     }
 }
